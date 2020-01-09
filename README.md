@@ -1,12 +1,12 @@
 # PAPER TITLE
 
 # Introduction
-Here we provide the data and code for:  [**PAPER TITLE**](https://github.com/mathewhauer/paper_template/blob/master/MANUSCRIPT/manuscript.pdf)
+Here we provide the data and code for:  [**PAPER TITLE**](https://github.com/mathewhauer/demographic-anomalies/blob/master/MANUSCRIPT/manuscript.pdf)
 
 ### Citation
 
 
-> Hauer, M.E. & Scientist 2. *Great Journal* (DOI Forthcoming) (YEAR ACCESSED).
+> Hauer, M.E. & Bohon, S. *Great Journal* (DOI Forthcoming) (YEAR ACCESSED).
 
 
 # Abstract
@@ -16,7 +16,7 @@ Here we provide the data and code for:  [**PAPER TITLE**](https://github.com/mat
 
 **Figure Title.** Description of Figure.
 
-To see all of the underlying code and the results, [click here](http://htmlpreview.github.io/?https://github.com/mathewhauer/paper_template/blob/master/MANUSCRIPT/reproduce.html)
+To see all of the underlying code and the results, [click here](http://htmlpreview.github.io/?https://github.com/mathewhauer/demographic-anomalies/blob/master/MANUSCRIPT/reproduce.html)
 
 # Organization
 - `/R/SCRIPTS/`  — Scripts and output for figures included in the main document.
@@ -32,7 +32,7 @@ To see all of the underlying code and the results, [click here](http://htmlprevi
 - Feel free to create a new branch for further incorporation and analysis. 
 
 # Correspondence
-For any issues with the functionality of these scripts please [create an issue](https://github.com/mathewhauer/paper_template/issues).
+For any issues with the functionality of these scripts please [create an issue](https://github.com/mathewhauer/demographic-anomalies/issues).
 
 ## License
 The data collected and presented is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/us/deed.en_US), and the underlying code used to format, analyze and display that content is licensed under the [MIT license](http://opensource.org/licenses/mit-license.php).

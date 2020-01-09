@@ -25,16 +25,10 @@
 
 
 
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{booktabs}
-\usepackage{makecell}
-\usepackage[usenames, dvipsnames]{color}
-\usepackage{multirow}
-\usepackage{comment}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{multirow}
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{colortbl}
@@ -43,8 +37,22 @@
 \usepackage{threeparttable}
 \usepackage{threeparttablex}
 \usepackage[normalem]{ulem}
+\usepackage{makecell}
 \usepackage{xcolor}
-\newcommand{\beginsupplement}{\setcounter{table}{0} \renewcommand{\thetable}{S\arabic{table}}\setcounter{figure}{0} \renewcommand{\thefigure}{S\arabic{figure}}}
+
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
 
 \begin{document}
 
@@ -57,13 +65,13 @@
 
 \if0\blind
 {
-  \title{\bf Descriptive Paper Title}
+  \title{\bf Effects without a Cause: The Search for Demographic Anomalies}
 
   \author{
         Mathew E. Hauer \thanks{Thanks y'all!} \\
     Department of Sociology, Florida State University\\
-     and \\     Scientist 2 \\
-    Department of Department, Random State University\\
+     and \\     Stephanie A. Bohon \\
+    Department of Sociology, University of Tennessee - Knoxville\\
       }
   \maketitle
 } \fi
@@ -74,18 +82,32 @@
   \bigskip
   \bigskip
   \begin{center}
-    {\LARGE\bf Descriptive Paper Title}
+    {\LARGE\bf Effects without a Cause: The Search for Demographic Anomalies}
   \end{center}
   \medskip
 } \fi
 
 \bigskip
 \begin{abstract}
-Lorem Ipsum.
+The proliferation of data, modern computing advances, and powerful
+statistical algorithms unlock the potential search for hidden,
+previously un- or understudied demographic anomalies. Here, we
+investigate US state-level fertility and mortality time series since
+1999 to uncover the hidden baby booms/busts and mortality
+plagues?/non-plauges?. We find 38 states exhibited at least one
+mortality anomaly, totalling more than 318k anomalous deaths and an
+additional 6 states exhibited at least one mortality non-plague?
+totalling 164k protective deaths. 12 states exhibited baby busts,
+totalling more than 240k missing births and an additional 11 states
+exhibited baby booms totalling more than 134k additional births. These
+results suggest the widespread detection of demographic anomalies. Our
+analysis does not examine the \emph{causes} of these anomalies and our
+results point to important further research on the causes of anomalous
+demographic behavior.\\
 \end{abstract}
 
 \noindent%
-{\it Keywords:} keyword, keyword, keyword
+{\it Keywords:} mortality, fertility, causal inference
 \vfill
 
 \newpage
@@ -96,43 +118,168 @@ Lorem Ipsum.
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-This is an introduction. This is a citation
-\citep{foxBackNoAnalogFuture2007}
+The proliferation of data, advances in high performance (``super'')
+computing, and the development of powerful statistical algorithms mark
+the era of ``Big Data'' or data science
+\citep{van2016data, zikopoulos2011}, with the potential for researchers
+to find hidden or understudied social phenomena
+\citep{bohon2018demography}. While the availability of Big Data and high
+performance computing allows novel exploration of data through causal
+inference
+\citep{bohon2018demography, rcausalimpact, shiffrin2016drawing},
+relatively few studies utilize causal inference techniques in the study
+of demographic phenomena. However, understanding social phenomena using
+these advances reveals important insights into society
+\citep{angrist1989lifetime, mas2009peers} and allows us to better
+monitor population trends \citep{nobles2019, torche2015hidden}.
 
-You can also embed plots (\textbf{\autoref{fig-pressure}}), for example:
+Causal inference approaches in social sciences have a long history
+\citep{grimmer2015ppsp}. Often, the identification of a casual mechanism
+requires either a randomized control trial (RCT) or expert knowledge
+applied to a natural experiment. For population-level analysis,
+expensive RCTs usually preclude their widespread adoption
+\citep{west2008ajph}. Using natural experiments, however, provides
+important and more widespread insights on the determinants of migration
+after Hurricane Katrina in 2006
+\citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
+mini baby booms after electrical blackouts \citep{fetzer2018jpe}, and
+the highly publicized estimates of excess mortality after Hurricane
+Maria in Puerto Rico in 2016
+\citep{kishore2018mortality, santos2018use}. Both RCTs and natural
+experiments follow traditional, hypothesis testing, inductive scientific
+paradigms where a question is first posed and scientists generate or
+find data to answer the question. Such approaches, while extensively
+utilized and time-tested, are likely to miss important phenomena that
+might go unnoticed.
 
-\begin{figure}
-\centering
-\includegraphics{manuscript_files/figure-latex/pressure-1.png}
-\caption{\textbf{Title of the figure.} Solid dots show blah blah blah.
-\label{fig-pressure}}
-\end{figure}
+Abductive modeling is the movement from the inductive to the deductive,
+and sometimes back and forth, to reach conclusions
+\citep{bryant2014realm} or ``inferring cause from effect''
+\citep{Crowder2017}. In situations with large data sets, an abductive
+approach is far superior to deductive hypothesis testing, as p-values
+with an extremely large number of cases are far from revealing
+\citep{head2015extent, nuzzo2014scientific} and we do not want to make
+purely inductive inferences from data of questionable generalizability
+\citep{ruggles2014big}. Owing to the long history of big datasets in
+demographic research (one of the original ``big data'' resources
+\citep{ruggles2014big}), the rich demographic data available in the
+United States make the potential revelation of interesting and important
+demographic phenomena not only possible, but extremely plausible -- even
+if identification of the phenomena occurs without identifying the
+underlying cause. In other sciences, the identification of effects
+without causes has led to new theories of galactic migration of planets
+and other breakthroughs \citep{gomes2005n}.
 
-And you can embed tables (\textbf{\autoref{error-table}}):
+In this paper, we use modern statistical outlier detection algorithms
+\citep{chen1993joint} on nearly twenty years of mortality and fertility
+data at the US state-level to identify anomalous demographic behavior.
+In essence, we identify \emph{effects without knowledge of the cause}.
+We ask two questions regarding demographic anomalies: What are the
+hidden baby booms/busts and mortality spikes/dips in the United States
+over the last twenty years? We do not necessarily know the causes of
+these anomalies but identifying them allows scientists with more
+detailed knowledge of local population dynamics, state-level policy
+making, or macro-economics to explain these phenomena post-hoc. From
+explanations of phenomena that may have previously gone unnoticed,
+demographers may be able to better forecast populations and provide
+policy solutions for impending problems.
 
-\begin{table}[t]
+\hypertarget{materials-and-methods}{%
+\section{Materials and Methods}\label{materials-and-methods}}
 
-\caption{\label{tab:cars}\label{error-table}\textbf{Summary statistics for cars.} APE is the Description here.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}{lll}
-\toprule
-  &     speed &      dist\\
-\midrule
- & Min.   : 4.0 & Min.   :  2\\
+\hypertarget{method}{%
+\subsection{Method}\label{method}}
 
- & 1st Qu.:12.0 & 1st Qu.: 26\\
+We use a statistical time series outlier detection algorithm
+\citep{chen1993joint}, implemented in the R programming language
+\citep{rcore} via the tsoutliers package \citep{tsoutliers2019}. This
+algorithm iteratively uses ARIMA models to 1) produce a counter-factual
+time series to initially detect an outlier or anomaly, and 2) refit the
+ARIMA with the outliers removed. Here we briefly summarize and describe
+the method.
 
- & Median :15.0 & Median : 36\\
+Often, the behavior of a time series can be described and summarized in
+ARIMA models. If a series of values, \(y_t^*\), is subject to \(m\)
+interventions or outliers at time points \(t_1,t_2,…,t_m\), then
+\(y_t^*\) can be defined as
 
- & Mean   :15.4 & Mean   : 43\\
+\[y_t^* = \sum_{j=1}^{m} \omega_jL_j(B)I_t(t_j) + \frac{\theta(B)}{\phi(B)\alpha(B)}\alpha_t\]
 
- & 3rd Qu.:19.0 & 3rd Qu.: 56\\
+Where \(I_t(t_j)\) is an indicator variable with a value of 1 at
+observation \(t_j\) and where the \(j\)th outlier arises, \(\phi(B)\) is
+an autoregressive polynomial with all roots outside the unit circle,
+\(\theta(B)\) is a moving average polynomial with all roots outside the
+unit circle, and \(\alpha(B)\) is an autoregressive polynomial with all
+roots on the unit circle.
 
-\multirow{-6}{*}{\raggedright\arraybackslash } & Max.   :25.0 & Max.   :120\\
-\bottomrule
-\end{tabular}}
-\end{table}
+We examine three types of outliers at time point \(t_m\): 1) additive
+outliers (AO), defined as \(L_j(B)=1\); 2) level shift outliers (LS),
+defined as \(L_j(B) = 1/(1-B)\); and 2) temporary change outliers (TC),
+defined as \(L_j(B) = 1/(1-\delta B)\).
+
+Colloquially, additive outliers arise when a single event causes the
+time series to unexpectedly increase/decrease for a single time period;
+level shift outliers arise when an event causes the time series to
+unexpectedly increase/decrease for multiple time periods; and temporary
+change outliers arise when an event causes the time series to
+unexpectedly increase/decrease with lingering effects that decay over
+multiple time periods.
+
+An outlier is detected using a regression equation
+
+\[ \pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \alpha_t \]
+
+where \(\pi(B)=\sum_{i=o}^{inf} \pi_iB^i\). The identification of
+outliers then involves a three step process to (1) identify all
+potential outliers, \(t_j\) and \(L_j (B)\), (2) joint estimates of
+model parameters and outlier effects are computed to identify
+potentially spurious outliers, and (3) the outliers and effects are
+re-estimated without spurious outliers. Of importance here is step 2,
+which relies on some critical value above which an outlier at time point
+m is considered spurious. Based on Chien and Liu's
+\citeyearpar{chen1993joint} recommendation, we set a critical value of
+3.5 which generally minimizes the possibility of Type I errors or false
+positive outliers.
+
+Outliers are then reported using a simple t-statistic.
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+We search for demographic anomalies using the Center for Disease Control
+and Prevention's online WONDER monthly fertility (2003-2017) and
+mortality databases (1999-2016) for all fifty states and the District of
+Columbia \citep{CDC_fert07, CDC_mort}. These data sets contain every
+birth and death record in the United States over the time periods of
+interest, representing the universe of both mortality and fertility data
+in the US. These data are considered the ``gold standard'' of data
+collections \citep{mahapatra2007civil} and have been considered
+``complete'' since 1968 \citep{hetzel2016us}. We search over each state
+equivalent's (n=51) mortality (n=228) and fertility (n=180) monthly time
+series for a total of 20,808 state-months of data.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+We detect numerous anomalous mortality and fertility events at the US
+state-level since 1999. A full listing of these anomalies can be found
+in the \textbf{Supplementary Materials}. Here, we highlight highly
+significant mortality and fertility events across all three types of
+outliers (Additive Outliers, Level Shift Outliers, and Temporary Change
+Outliers) where we have identified plausible explanations for these
+outliers.
+
+\hypertarget{mortality}{%
+\subsection{Mortality}\label{mortality}}
+
+We begin with mortality for New York State (Figure 1). We identify seven
+anomalies in the mortality time series for New York, all with
+t-statistics in excess of 3.91, making these anomalies highly
+significant. The algorithm correctly identifies September 2001 as an
+additive outlier (2001:09 t=6.40) where mortality in that month was
+1,628 higher than anticipated. Clearly, this mortality event is likely
+caused by the September 11 tragedy and the detection of this mortality
+event provides confidence in our detection of other anomalies.
 
 \newpage
 
