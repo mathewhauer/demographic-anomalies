@@ -92,11 +92,12 @@
 The proliferation of data, modern computing advances, and powerful
 statistical algorithms unlock the potential search for hidden,
 previously un- or understudied demographic anomalies. Here, we
-investigate US state-level fertility and mortality time series since
-1999 to uncover the hidden baby booms/busts and mortality
-plagues?/non-plauges?. We find 38 states exhibited at least one
-mortality anomaly, totalling more than 318k anomalous deaths and an
-additional 6 states exhibited at least one mortality non-plague?
+demonstrate how demographers can use causal inference techniques to
+identify anamolies by investigating US state-level fertility and
+mortality time series since 1999 to uncover the hidden baby booms/busts
+and mortality plagues?/non-plauges?. We find 38 states exhibited at
+least one mortality anomaly, totalling more than 318k anomalous deaths
+and an additional 6 states exhibited at least one mortality non-plague?
 totalling 164k protective deaths. 12 states exhibited baby busts,
 totalling more than 240k missing births and an additional 11 states
 exhibited baby booms totalling more than 134k additional births. These
@@ -133,14 +134,18 @@ these advances reveals important insights into society
 \citep{angrist1989lifetime, mas2009peers} and allows us to better
 monitor population trends \citep{nobles2019, torche2015hidden}.
 
-Causal inference approaches in social sciences have a long history
-\citep{grimmer2015ppsp}. Often, the identification of a casual mechanism
-requires either a randomized control trial (RCT) or expert knowledge
-applied to a natural experiment. For population-level analysis,
-expensive RCTs usually preclude their widespread adoption
-\citep{west2008ajph}. Using natural experiments, however, provides
-important and more widespread insights on the determinants of migration
-after Hurricane Katrina in 2006
+Causal inference, in its most common usage, is an attempt to uncover the
+underlying mechanism that results in changes in a phenomenon and have a
+long history approaches in social sciences \citep{grimmer2015ppsp}.
+Often, the identification of a casual mechanism requires either a
+randomized control trial (RCT) or expert knowledge applied to a natural
+experiment. For population-level analysis, expensive RCTs usually
+preclude their widespread adoption \citep{west2008ajph}. Using natural
+experiments provide less certainty about causation and fewer
+opportunities to replicate work but they provide important and
+widespread insights such as the determinants of migration, however,
+provides important and more widespread insights on the determinants of
+migration after Hurricane Katrina in 2006
 \citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
 mini baby booms after electrical blackouts \citep{fetzer2018jpe}, and
 the highly publicized estimates of excess mortality after Hurricane
@@ -151,6 +156,17 @@ paradigms where a question is first posed and scientists generate or
 find data to answer the question. Such approaches, while extensively
 utilized and time-tested, are likely to miss important phenomena that
 might go unnoticed.
+
+Both RCTs and natural experiments follow traditional hypothesis
+testing--inductive scientific paradigms where a question is first posed
+and scientists generate or find data to answer the question. Such
+approaches, while extensively utilized and time-tested, are likely to
+miss important phenomena that might go unnoticed. Data scientists are
+rethinking these approaches and have re-envisioned causal inference as a
+machine learning technique that allows big data researchers to move from
+correlations that have been established with good accuracy to making
+strong conclusions about the underlying mechanisms that produce these
+correlations \citep{pearl2018book}.
 
 Abductive modeling is the movement from the inductive to the deductive,
 and sometimes back and forth, to reach conclusions
@@ -239,9 +255,7 @@ which relies on some critical value above which an outlier at time point
 m is considered spurious. Based on Chien and Liu's
 \citeyearpar{chen1993joint} recommendation, we set a critical value of
 3.5 which generally minimizes the possibility of Type I errors or false
-positive outliers.
-
-Outliers are then reported using a simple t-statistic.
+positive outliers. Outliers are reported using a simple t-statistic.
 
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
@@ -263,23 +277,93 @@ series for a total of 20,808 state-months of data.
 
 We detect numerous anomalous mortality and fertility events at the US
 state-level since 1999. A full listing of these anomalies can be found
-in the \textbf{Supplementary Materials}. Here, we highlight highly
-significant mortality and fertility events across all three types of
-outliers (Additive Outliers, Level Shift Outliers, and Temporary Change
-Outliers) where we have identified plausible explanations for these
-outliers.
+in the \textbf{Supplementary Materials}. We begin with a summary of the
+anomalies we detect and then we highlight highly significant mortality
+and fertility anomalies across all three types of outliers (Additive
+Outliers, Level Shift Outliers, and Temporary Change Outliers) with
+plausible explanations.
+
+\hypertarget{overall-anomalies}{%
+\subsection{Overall Anomalies}\label{overall-anomalies}}
 
 \hypertarget{mortality}{%
 \subsection{Mortality}\label{mortality}}
 
-We begin with mortality for New York State (Figure 1). We identify seven
-anomalies in the mortality time series for New York, all with
-t-statistics in excess of 3.91, making these anomalies highly
+We begin with mortality for New York State (\autoref{fig:mortnewyork}).
+We identify seven anomalies in the mortality time series for New York,
+all with t-statistics in excess of 3.91, making these anomalies highly
 significant. The algorithm correctly identifies September 2001 as an
 additive outlier (2001:09 t=6.40) where mortality in that month was
-1,628 higher than anticipated. Clearly, this mortality event is likely
-caused by the September 11 tragedy and the detection of this mortality
-event provides confidence in our detection of other anomalies.
+1,628 higher than anticipated. This mortality event is likely caused by
+the September 11 tragedy and the detection of this mortality event
+provides confidence in our detection of other anomalies.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/MortalityNewYork-1.pdf}
+\caption{\textbf{Anomaly Detection for New York state mortality, 1999-2016.}
+The top panel contains the original time series (light gray) and the
+corrected, counter-factual time series in the absence of anomalies
+(blue). The red dots on the top panel correspond to the onset of
+detected anomalies. The bottom panel contains the magnitude and type of
+the outlier. We detect all three types of outliers in New York mortality
+data during period 1999-2016. We detect additive outliers (AO) in
+January 2000, September 2001, January 2005, and January 2013; temporary
+change (TC) outliers in February 2007 and January 2015; and a level
+shift (LS) starting in February 2004. Outliers range in significance
+from a low t-statistic of 3.91 in the TC 2015:01 to a high t-statistic
+of 6.40 in the AO outlier in 2001:09. \label{fig:mortnewyork}}
+\end{figure}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+In \textbf{\autoref{fig:mortnewyork}}, notice the strong level shift
+(LS) that occurs in February 2004 (2004:02 t=5.59) which prevented
+almost 870 deaths per month. This shift totals more than 144,000 averted
+deaths compared to the counter-factual time series and is the single
+largest mortality protective anomaly among all states. This translates
+to 4.5\% fewer deaths than expected over the time period. What is
+driving this mortality protection? What policies did NY put into place
+that might have contributed to this considerable mortality reduction?
+What environmental conditions may have changed? These are the kinds of
+questions that arise from our analyses.
+
+Contrast the mortality protection in New York with the enhanced
+mortality in New Hampshire (\textbf{\autoref{fig:mortnewhamp}}). Here we
+detect two highly significant level shifts (LS) in the monthly mortality
+data, first in April 2010 and again in November 2014 (2010:04 t=3.51;
+2014:11 t=6.68). These anomalies suggest New Hampshire experienced 9,700
+more deaths (+14\% more than expected) in a seven-year period beginning
+in early 2010. This is the single largest percentage mortality
+increase/decrease we detected among all states. Not coincidentally, NH
+has the second highest opioid-related mortality in the US
+\citep{beetham2019access} and it is reasonable that we detect this
+epidemic in our results.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/MortalityNewHamp-1.pdf}
+\caption{\textbf{Anomaly Detection for New Hampshire state mortality, 1999-2016.}
+Here we detect two outliers, both level shifts in outliers (LS) in April
+2010 and again in November 2014. These anomalies suggest New Hampshire
+experienced approximately 9,700 more deaths than expected since 2010 or
+14\% more deaths in the state over just seven years.
+\label{fig:mortnewhamp}}
+\end{figure}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+In the case of New York and New Hampshire, some of the demographic
+anomalies have plausible explanations. It seems likely that New York's
+AO anomaly in September 2001 is caused by the 9/11 tragedy and the rise
+in New Hampshire's mortality starting in 2010 could be linked to the
+opioid epidemic. However, we detect numerous seemingly unexplainable
+demographic anomalies in other states. Figure 3 shows two such
+unexplained anomalies.
 
 \newpage
 

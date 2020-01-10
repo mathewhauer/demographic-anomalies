@@ -87,3 +87,5 @@ registerDoParallel(clusters) # Register Cluster
 getDoParWorkers() # Determine Number of Utilized Clusters
 getDoParName() #  Name of the Currently Registered Parallel Computing Backend
 getDoParVersion() #  Version of the Currently Registered Parallel Computing Backend
+
+sigma <- 3.5
