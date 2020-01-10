@@ -89,10 +89,11 @@
 
 \bigskip
 \begin{abstract}
+\noindent%
 The proliferation of data, modern computing advances, and powerful
 statistical algorithms unlock the potential search for hidden,
-previously un- or understudied demographic anomalies. Here, we
-investigate US state-level fertility and mortality time series since
+previously un- or understudied demographic anomalies. Here, we demonstrate how demographers can use causal inference techniques to identify anamolies by 
+investigating US state-level fertility and mortality time series since
 1999 to uncover the hidden baby booms/busts and mortality
 plagues?/non-plauges?. We find 38 states exhibited at least one
 mortality anomaly, totalling more than 318k anomalous deaths and an
@@ -101,13 +102,13 @@ totalling 164k protective deaths. 12 states exhibited baby busts,
 totalling more than 240k missing births and an additional 11 states
 exhibited baby booms totalling more than 134k additional births. These
 results suggest the widespread detection of demographic anomalies. Our
-analysis does not examine the \emph{causes} of these anomalies and our
+analysis does not examine the \emph{causes} of these anomalies but our
 results point to important further research on the causes of anomalous
 demographic behavior.\\
 \end{abstract}
 
 \noindent%
-{\it Keywords:} mortality, fertility, causal inference
+{\it Keywords:} mortality, fertility, causal inference, population trends
 \vfill
 
 \newpage
@@ -133,24 +134,27 @@ these advances reveals important insights into society
 \citep{angrist1989lifetime, mas2009peers} and allows us to better
 monitor population trends \citep{nobles2019, torche2015hidden}.
 
-Causal inference approaches in social sciences have a long history
+Causal inference, in its most common usage, is an attempt to undercover the underlying mechanism that results in changes in a phenomenon. Causal inference approaches in social sciences have a long history
 \citep{grimmer2015ppsp}. Often, the identification of a casual mechanism
 requires either a randomized control trial (RCT) or expert knowledge
 applied to a natural experiment. For population-level analysis,
 expensive RCTs usually preclude their widespread adoption
-\citep{west2008ajph}. Using natural experiments, however, provides
-important and more widespread insights on the determinants of migration
+\citep{west2008ajph}. Natural experiments provides less certainty about causation and fewer opportunities to replicate work; natural experiments provide
+important and widespread insights such as the determinants of migration
 after Hurricane Katrina in 2006
 \citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
 mini baby booms after electrical blackouts \citep{fetzer2018jpe}, and
 the highly publicized estimates of excess mortality after Hurricane
 Maria in Puerto Rico in 2016
-\citep{kishore2018mortality, santos2018use}. Both RCTs and natural
-experiments follow traditional, hypothesis testing, inductive scientific
+\citep{kishore2018mortality, santos2018use}. 
+
+Both RCTs and natural
+experiments follow traditional hypothesis testing--inductive scientific
 paradigms where a question is first posed and scientists generate or
 find data to answer the question. Such approaches, while extensively
 utilized and time-tested, are likely to miss important phenomena that
-might go unnoticed.
+might go unnoticed. Data scientists are rethinking these approaches and have re-envisioned causal inference as a machine learning technique that allows big data researchers to move from correlations that have been established with good accuracy to making strong conclusions about the underlying mechanisms that produce these correlations
+\citep{Pearl2018}.
 
 Abductive modeling is the movement from the inductive to the deductive,
 and sometimes back and forth, to reach conclusions
