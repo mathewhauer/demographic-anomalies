@@ -176,7 +176,7 @@ approach is far superior to deductive hypothesis testing, as p-values
 with an extremely large number of cases are far from revealing
 \citep{head2015extent, nuzzo2014scientific} and we do not want to make
 purely inductive inferences from data of questionable generalizability
-\citep{ruggles2014big}. Owing to the long history of big datasets in
+\citep{ruggles2014big}. Owing to the long history of big data sets in
 demographic research (one of the original ``big data'' resources
 \citep{ruggles2014big}), the rich demographic data available in the
 United States make the potential revelation of interesting and important
@@ -252,7 +252,7 @@ model parameters and outlier effects are computed to identify
 potentially spurious outliers, and (3) the outliers and effects are
 re-estimated without spurious outliers. Of importance here is step 2,
 which relies on some critical value above which an outlier at time point
-m is considered spurious. Based on Chien and Liu's
+m is considered spurious. Based on Chen and Liu's
 \citeyearpar{chen1993joint} recommendation, we set a critical value of
 3.5 which generally minimizes the possibility of Type I errors or false
 positive outliers. Outliers are reported using a simple t-statistic.
@@ -364,6 +364,114 @@ in New Hampshire's mortality starting in 2010 could be linked to the
 opioid epidemic. However, we detect numerous seemingly unexplainable
 demographic anomalies in other states. Figure 3 shows two such
 unexplained anomalies.
+
+\hypertarget{fertility}{%
+\subsection{Fertility}\label{fertility}}
+
+We begin with a clear temporary change (TC) outlier for fertility in
+Louisiana (\textbf{\autoref{fig:fertla}}). Here we detect two TC
+outliers, nearly back-to-back in 2005 (2005:08 \emph{t} = -6; and
+2005:10 \emph{t} = -5), coinciding with the destruction of Hurricane
+Katrina from the same year. The migration associated with Hurricane
+Katrina has garnered most of the attention of demographers
+\citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
+but the hurricane had a very clear impact on fertility behaviors too,
+creating a mini ``baby bust'' in Louisiana. We estimate 4,411 fewer
+births in Louisiana compared to the counterfactual, likely attributable
+to the Hurricane.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/FertilityLouisiana-1.pdf}
+\caption{\textbf{Anomaly detection in Louisiana state fertility, 2003-2018.}
+Here we detect two outliers, back-to-back, likely resulting from
+Hurricane Katrina August and October 2005, representing a decrease of
+more than 4,400 births due to the hurricane. \label{fig:fertla}}
+\end{figure}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+We also highlight a level shift (LS) outlier for fertility in
+Connecticut. Here we detect a strong (\emph{t}=
+\texttt{prettyNum(outlier.fert.conn\$outliers\$tstat,\ digits\ =\ 3)};
+-285 births/month) level shift toward lower fertility beginning in
+August 2009 (2009:08) that continues through the end of the period
+(\textbf{\autoref{fig:fertconn}}). This LS toward lower fertility
+reduced the \# of births by -28,752 or -8.57\% lower than the
+counterfactual time series. The stock market crash of 2008, where the
+Dow Jones Industrial Average had the largest single-day loss up to that
+point, occured just 11 months before we detect a shift toward lower
+fertility. We believe the trend toward lower fertility in August 2009
+and the stock market crash in September 2008 are linked.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/FertilityConnecticut-1.pdf}
+\caption{\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.}
+Here we detect one outlier, an additive outlier (AO) in May 2014 (
+extit\{t\}=4.96), representing a 14\% increase in expected births in
+that month. \label{fig:fertconn}}
+\end{figure}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+\hypertarget{interesting-anomalous-fertilitymortality-events}{%
+\subsection{Interesting Anomalous Fertility/Mortality
+events}\label{interesting-anomalous-fertilitymortality-events}}
+
+In the examples above, we highlighted four fertility/mortality anomalies
+with plausible explanations. However, these four anomalies are but a
+fraction of anomalies we detect. Here, we highlight four additional
+anomalies without easily identifiable explanations.
+
+In \textbf{\autoref{fig:ferthawaii}} we identify a single additive
+anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with
+a \emph{t}-statistic of 4.96, 14\% above the counter-factual time
+series. This single, anomalous month is also the second highest monthly
+births in the time series. We have no plausible explanation for this
+anomaly. We do not believe this is simply a data error as the other
+extreme values, September 2008 and February 2005 with the highest and
+lowest recorded fertility respectively, were not identified as anomalous
+events. Even if we were to assume this anomaly resulted from data entry
+error, it remains an \emph{unaltered} data error in the Hawaiian monthly
+fertility data.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/AnomalyHawaii-1.pdf}
+\caption{\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.}
+Here we detect one outlier, an additive outlier (AO) in May 2014 (
+extit\{t\}=4.96), representing a 14\% increase in expected births in
+that month. \label{fig:ferthawaii}}
+\end{figure}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+We detect a very interesting, unexplainable mortality anomaly in North
+Carolina (\textbf{\autoref{fig:fertmiss}}). Beginning in February 2008 ,
+North Carolina saw a level shift (LS) (2008:02; \emph{t}-stat = -4.76)
+of 800 fewer deaths per month until the end of the period. Granted, the
+decade after the LS still saw three mortality anomalies that resulted in
+additional, unexpected deaths in 2009, 2012, and 2017, the LS is still a
+remarkable mortality reduction of nearly 100k (-88,335) deaths over 10
+years! While North Carolina saw the raw count of mortality remain
+constant or slightly reduce since 2008, the state grew from 9.3 million
+residents in 2008 to 10.4 million in 2018. In spite of its growing
+population, North Carolina has, rather miraculously, \emph{reduced} its
+overall mortality risk.
+\includegraphics{manuscript_files/figure-latex/AnomalyMississippi-1.pdf}
+
+\begin{verbatim}
+## numeric(0)
+\end{verbatim}
+
+Hawaii - AO X33 - LS X28 X22 X20 X05
 
 \newpage
 

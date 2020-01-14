@@ -89,3 +89,4 @@ getDoParName() #  Name of the Currently Registered Parallel Computing Backend
 getDoParVersion() #  Version of the Currently Registered Parallel Computing Backend
 
 sigma <- 3.5
+set.seed(1)

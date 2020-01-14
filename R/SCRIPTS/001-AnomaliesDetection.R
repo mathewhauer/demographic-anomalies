@@ -99,6 +99,7 @@ df_sums <- data.frame()
 sigma <- 3.5
 
 for(i in 1:length(unique(countylist))){
+  set.seed(1)
   tryCatch({
     df2<- setNames(data.frame(matrix(ncol = 5, nrow = 0)), c("type", "ind", "time", "coefhat", "tstat"))
     dat2 <- filter(dat, location == paste0(countylist[i]))
