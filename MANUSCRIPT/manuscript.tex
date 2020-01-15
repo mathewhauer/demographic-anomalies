@@ -281,7 +281,8 @@ in the \textbf{Supplementary Materials}. We begin with a summary of the
 anomalies we detect and then we highlight highly significant mortality
 and fertility anomalies across all three types of outliers (Additive
 Outliers, Level Shift Outliers, and Temporary Change Outliers) with
-plausible explanations.
+plausible explanations. Finally, we highlight two strong anomalies that
+bely explanation.
 
 \hypertarget{overall-anomalies}{%
 \subsection{Overall Anomalies}\label{overall-anomalies}}
@@ -289,37 +290,17 @@ plausible explanations.
 \hypertarget{mortality}{%
 \subsection{Mortality}\label{mortality}}
 
-We begin with mortality for New York State (\autoref{fig:mortnewyork}).
-We identify seven anomalies in the mortality time series for New York,
-all with t-statistics in excess of 3.91, making these anomalies highly
-significant. The algorithm correctly identifies September 2001 as an
-additive outlier (2001:09 t=6.40) where mortality in that month was
-1,628 higher than anticipated. This mortality event is likely caused by
-the September 11 tragedy and the detection of this mortality event
-provides confidence in our detection of other anomalies.
+We begin with mortality for New York State
+(\textbf{\autoref{fig:mortnewhamp}a}). We identify seven anomalies in
+the mortality time series for New York, all with t-statistics in excess
+of 3.91, making these anomalies highly significant. The algorithm
+correctly identifies September 2001 as an additive outlier (2001:09
+t=6.40) where mortality in that month was 1,628 higher than anticipated.
+This mortality event is likely caused by the September 11 tragedy and
+the detection of this mortality event provides confidence in our
+detection of other anomalies.
 
-\begin{figure}
-\centering
-\includegraphics{manuscript_files/figure-latex/MortalityNewYork-1.pdf}
-\caption{\textbf{Anomaly Detection for New York state mortality, 1999-2016.}
-The top panel contains the original time series (light gray) and the
-corrected, counter-factual time series in the absence of anomalies
-(blue). The red dots on the top panel correspond to the onset of
-detected anomalies. The bottom panel contains the magnitude and type of
-the outlier. We detect all three types of outliers in New York mortality
-data during period 1999-2016. We detect additive outliers (AO) in
-January 2000, September 2001, January 2005, and January 2013; temporary
-change (TC) outliers in February 2007 and January 2015; and a level
-shift (LS) starting in February 2004. Outliers range in significance
-from a low t-statistic of 3.91 in the TC 2015:01 to a high t-statistic
-of 6.40 in the AO outlier in 2001:09. \label{fig:mortnewyork}}
-\end{figure}
-
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
-
-In \textbf{\autoref{fig:mortnewyork}}, notice the strong level shift
+In \textbf{\autoref{fig:mortnewhamp}a}, notice the strong level shift
 (LS) that occurs in February 2004 (2004:02 t=5.59) which prevented
 almost 870 deaths per month. This shift totals more than 144,000 averted
 deaths compared to the counter-factual time series and is the single
@@ -331,45 +312,42 @@ What environmental conditions may have changed? These are the kinds of
 questions that arise from our analyses.
 
 Contrast the mortality protection in New York with the enhanced
-mortality in New Hampshire (\textbf{\autoref{fig:mortnewhamp}}). Here we
-detect two highly significant level shifts (LS) in the monthly mortality
-data, first in April 2010 and again in November 2014 (2010:04 t=3.51;
-2014:11 t=6.68). These anomalies suggest New Hampshire experienced 9,700
-more deaths (+14\% more than expected) in a seven-year period beginning
-in early 2010. This is the single largest percentage mortality
-increase/decrease we detected among all states. Not coincidentally, NH
-has the second highest opioid-related mortality in the US
-\citep{beetham2019access} and it is reasonable that we detect this
-epidemic in our results.
+mortality in New Hampshire (\textbf{\autoref{fig:mortnewhamp}b}). Here
+we detect two highly significant level shifts (LS) in the monthly
+mortality data, first in April 2010 and again in November 2014 (2010:04
+t=3.51; 2014:11 t=6.68). These anomalies suggest New Hampshire
+experienced 9,700 more deaths (+14\% more than expected) in a seven-year
+period beginning in early 2010. This is the single largest percentage
+mortality increase/decrease we detected among all states. Not
+coincidentally, NH has the second highest opioid-related mortality in
+the US \citep{beetham2019access} and it is reasonable that we detect
+this epidemic in our results.
 
 \begin{figure}
 \centering
 \includegraphics{manuscript_files/figure-latex/MortalityNewHamp-1.pdf}
-\caption{\textbf{Anomaly Detection for New Hampshire state mortality, 1999-2016.}
-Here we detect two outliers, both level shifts in outliers (LS) in April
-2010 and again in November 2014. These anomalies suggest New Hampshire
+\caption{\textbf{Anomaly Detection for New York (a) and New Hampshire (b) state mortality, 1999-2016.}
+The top part of each panel contains the original time series (light
+gray), the corrected, counter-factual time series in the absence of
+anomalies (blue), and the red dots correspond to the onset of detected
+anomalies. The bottom part of each panel contains the magnitude and type
+of the outlier in red. In New York (a), we detect additive outliers (AO)
+in January 2000, September 2001, January 2005, and January 2013;
+temporary change (TC) outliers in February 2007 and January 2015; and a
+level shift (LS) starting in February 2004. In New Hampshire (b), we
+detect two outliers, both level shift outliers (LS) in April 2010 and
+again in November 2014. These anomalies suggest New York experienced a
+significant mortality event in September 2001 and New Hampshire
 experienced approximately 9,700 more deaths than expected since 2010 or
 14\% more deaths in the state over just seven years.
 \label{fig:mortnewhamp}}
 \end{figure}
 
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
-
-In the case of New York and New Hampshire, some of the demographic
-anomalies have plausible explanations. It seems likely that New York's
-AO anomaly in September 2001 is caused by the 9/11 tragedy and the rise
-in New Hampshire's mortality starting in 2010 could be linked to the
-opioid epidemic. However, we detect numerous seemingly unexplainable
-demographic anomalies in other states. Figure 3 shows two such
-unexplained anomalies.
-
 \hypertarget{fertility}{%
 \subsection{Fertility}\label{fertility}}
 
 We begin with a clear temporary change (TC) outlier for fertility in
-Louisiana (\textbf{\autoref{fig:fertla}}). Here we detect two TC
+Louisiana (\textbf{\autoref{fig:fertla}a}). Here we detect two TC
 outliers, nearly back-to-back in 2005 (2005:08 \emph{t} = -6; and
 2005:10 \emph{t} = -5), coinciding with the destruction of Hurricane
 Katrina from the same year. The migration associated with Hurricane
@@ -380,55 +358,47 @@ creating a mini ``baby bust'' in Louisiana. We estimate 4,411 fewer
 births in Louisiana compared to the counterfactual, likely attributable
 to the Hurricane.
 
+We also highlight a level shift (LS) outlier for fertility in
+Connecticut. Here we detect a strong (\emph{t}= -3.71; -285
+births/month) level shift toward lower fertility beginning in August
+2009 (2009:08) that continues through the end of the period
+(\textbf{\autoref{fig:fertla}b}). This LS toward lower fertility reduced
+the \# of births by -28,752 or -8.57\% lower than the counterfactual
+time series. The stock market crash of 2008, where the Dow Jones
+Industrial Average had the largest single-day loss up to that point,
+occured just 11 months before we detect a shift toward lower fertility.
+We believe the trend toward lower fertility in August 2009 and the stock
+market crash in September 2008 are linked.
+
 \begin{figure}
 \centering
 \includegraphics{manuscript_files/figure-latex/FertilityLouisiana-1.pdf}
-\caption{\textbf{Anomaly detection in Louisiana state fertility, 2003-2018.}
-Here we detect two outliers, back-to-back, likely resulting from
-Hurricane Katrina August and October 2005, representing a decrease of
-more than 4,400 births due to the hurricane. \label{fig:fertla}}
+\caption{\textbf{Anomaly detection in Louisiana (a) and Connecticut (b) state fertility, 2003-2018.}
+In (a), we detect two outliers, back-to-back, likely resulting from
+Hurricane Katrina in August and October 2005, representing a decrease of
+more than 4,400 births due to the hurricane. In (b), we detect one
+outlier, a level shift outlier (LS) in August 2009. We believe this
+reduction is attributable to the stock market crash 11 months earlier.
+\label{fig:fertla}}
 \end{figure}
-
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
-
-We also highlight a level shift (LS) outlier for fertility in
-Connecticut. Here we detect a strong (\emph{t}=
-\texttt{prettyNum(outlier.fert.conn\$outliers\$tstat,\ digits\ =\ 3)};
--285 births/month) level shift toward lower fertility beginning in
-August 2009 (2009:08) that continues through the end of the period
-(\textbf{\autoref{fig:fertconn}}). This LS toward lower fertility
-reduced the \# of births by -28,752 or -8.57\% lower than the
-counterfactual time series. The stock market crash of 2008, where the
-Dow Jones Industrial Average had the largest single-day loss up to that
-point, occured just 11 months before we detect a shift toward lower
-fertility. We believe the trend toward lower fertility in August 2009
-and the stock market crash in September 2008 are linked.
-
-\begin{figure}
-\centering
-\includegraphics{manuscript_files/figure-latex/FertilityConnecticut-1.pdf}
-\caption{\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.}
-Here we detect one outlier, an additive outlier (AO) in May 2014 (
-extit\{t\}=4.96), representing a 14\% increase in expected births in
-that month. \label{fig:fertconn}}
-\end{figure}
-
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
 
 \hypertarget{interesting-anomalous-fertilitymortality-events}{%
 \subsection{Interesting Anomalous Fertility/Mortality
 events}\label{interesting-anomalous-fertilitymortality-events}}
 
 In the examples above, we highlighted four fertility/mortality anomalies
-with plausible explanations. However, these four anomalies are but a
-fraction of anomalies we detect. Here, we highlight four additional
-anomalies without easily identifiable explanations.
+with plausible explanations. In the case of New York and New Hampshire,
+the mortality anomalies have plausible explanations. It seems likely
+that New York's AO anomaly in September 2001 is caused by the 9/11
+tragedy and the rise in New Hampshire's mortality starting in 2010 could
+be linked to the opioid epidemic. Similarly, Louisiana's TC anomalies
+seem linked to Hurricanes Katrina and Rita while the LS anomaly in
+Connecticut's fertility appears linked to the Great Recession. However,
+we detect numerous seemingly unexplainable demographic anomalies in
+other states. \textbf{\autoref{fig:ferthawaii}} shows two such
+unexplained anomalies.
 
-In \textbf{\autoref{fig:ferthawaii}} we identify a single additive
+In \textbf{\autoref{fig:ferthawaii}a} we identify a single additive
 anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with
 a \emph{t}-statistic of 4.96, 14\% above the counter-factual time
 series. This single, anomalous month is also the second highest monthly
@@ -440,38 +410,24 @@ events. Even if we were to assume this anomaly resulted from data entry
 error, it remains an \emph{unaltered} data error in the Hawaiian monthly
 fertility data.
 
+This is contrast to \textbf{\autoref{fig:ferthawaii}b}, where we
+identify a strange mortality reduction in Ohio (\emph{t}-stat: -4.27).
+This LS is more than 1,100 deaths per month less than the counterfactual
+time series, suggesting had nearly 40,000 fewer deaths since February
+2015 than expected. This is the single-largest LS among all states. We
+could not identify the potential policies Ohio might have put into place
+to provide such a strong mortality protection.
+
 \begin{figure}
 \centering
 \includegraphics{manuscript_files/figure-latex/AnomalyHawaii-1.pdf}
-\caption{\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.}
-Here we detect one outlier, an additive outlier (AO) in May 2014 (
-extit\{t\}=4.96), representing a 14\% increase in expected births in
-that month. \label{fig:ferthawaii}}
+\caption{\textbf{Anomaly detection in Hawaii state fertility (a) and Ohio state mortality (b).}
+Here we detect one outlier, an additive outlier (AO) in May 2014 in
+Hawaii (a), representing a large, unexplainable 14\% increase in
+expected births in that month. We also detect a strong level shift (LS)
+reduction (b), representing a large, unexplainable reduction of nearly
+40,000 deaths in Ohio. \label{fig:ferthawaii}}
 \end{figure}
-
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
-
-We detect a very interesting, unexplainable mortality anomaly in North
-Carolina (\textbf{\autoref{fig:fertmiss}}). Beginning in February 2008 ,
-North Carolina saw a level shift (LS) (2008:02; \emph{t}-stat = -4.76)
-of 800 fewer deaths per month until the end of the period. Granted, the
-decade after the LS still saw three mortality anomalies that resulted in
-additional, unexpected deaths in 2009, 2012, and 2017, the LS is still a
-remarkable mortality reduction of nearly 100k (-88,335) deaths over 10
-years! While North Carolina saw the raw count of mortality remain
-constant or slightly reduce since 2008, the state grew from 9.3 million
-residents in 2008 to 10.4 million in 2018. In spite of its growing
-population, North Carolina has, rather miraculously, \emph{reduced} its
-overall mortality risk.
-\includegraphics{manuscript_files/figure-latex/AnomalyMississippi-1.pdf}
-
-\begin{verbatim}
-## numeric(0)
-\end{verbatim}
-
-Hawaii - AO X33 - LS X28 X22 X20 X05
 
 \newpage
 

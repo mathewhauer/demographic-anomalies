@@ -27,14 +27,11 @@ dat_mort <-
   arrange(location, Year)
 
 
+outlier.mort.ny <- read_rds("../R/DATA-PROCESSED/Plots/mort_ny")
+outlier.mort.nh <- read_rds("../R/DATA-PROCESSED/Plots/mort_nh")
+outlier.fert.conn <- read_rds("../R/DATA-PROCESSED/Plots/fert_conn")
+outlier.fert.la <- read_rds("../R/DATA-PROCESSED/Plots/fert_la")
+outlier.fert.hi <- read_rds("../R/DATA-PROCESSED/Plots/fert_hi")
+outlier.mort.oh <- read_rds("../R/DATA-PROCESSED/Plots/mort_oh")
 
-# df2<- setNames(data.frame(matrix(ncol = 5, nrow = 0)), c("type", "ind", "time", "coefhat", "tstat"))
-# dat2 <- filter(dat_mort, location == "X36")
-# dat3 <- ts(dat2$Target, start = year(min(dat_mort$Year)), end = c(year(max(dat_mort$Year)),12), frequency = 12)
-# outlier.county <- tsoutliers::tso(dat3,types = c("AO","LS","TC"),cval = sigma, maxit.iloop=10)
-# 
-# plot(outlier.county,
-#      args.lines.yadj = list(col = "black"),
-#      args.lines.y = list(col = "gray80")) +
-# title(main = "New York - Monthly Deaths")
-
+# overall_mortality <- read_rds("../R/DATA-PROCESSED/")

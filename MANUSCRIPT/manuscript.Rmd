@@ -57,8 +57,8 @@ read_chunk('../R/SCRIPTS/002-StatesAnalysis.R')
 ```{r DataLoad, include=FALSE}
 ```
 
-```{r StatesAnalysis, include=FALSE}
-```
+<!-- # ```{r StatesAnalysis, include=FALSE} -->
+<!-- # ``` -->
 
 # Introduction
 
@@ -107,88 +107,90 @@ We search for demographic anomalies using the Center for Disease Control and Pre
 [@CDC_fert07;@CDC_mort]. These data sets contain every birth and death record in the United States over the time periods of interest, representing the universe of both mortality and fertility data in the US.  These data are considered the “gold standard” of data collections [@mahapatra2007civil] and have been considered “complete” since 1968 [@hetzel2016us]. We search over each state equivalent’s (n=51) mortality (n=228) and fertility (n=180) monthly time series for a total of 20,808 state-months of data.
 
 # Results
-We detect numerous anomalous mortality and fertility events at the US state-level since 1999. A full listing of these anomalies can be found in the **Supplementary Materials**. We begin with a summary of the anomalies we detect and then we highlight highly significant mortality and fertility anomalies across all three types of outliers (Additive Outliers, Level Shift Outliers, and Temporary Change Outliers) with plausible explanations.
+We detect numerous anomalous mortality and fertility events at the US state-level since 1999. A full listing of these anomalies can be found in the **Supplementary Materials**. We begin with a summary of the anomalies we detect and then we highlight highly significant mortality and fertility anomalies across all three types of outliers (Additive Outliers, Level Shift Outliers, and Temporary Change Outliers) with plausible explanations. Finally, we highlight two strong anomalies that bely explanation.
 
 ## Overall Anomalies
 
 
 
 ## Mortality 
-We begin with mortality for New York State (\autoref{fig:mortnewyork}). We identify seven anomalies in the mortality time series for New York, all with t-statistics in excess of 3.91, making these anomalies highly significant. The algorithm correctly identifies September 2001 as an additive outlier (2001:09 t=6.40) where mortality in that month was 1,628 higher than anticipated. This mortality event is likely caused by the September 11 tragedy and the detection of this mortality event provides confidence in our detection of other anomalies. 
+We begin with mortality for New York State (**\autoref{fig:mortnewhamp}a**). We identify seven anomalies in the mortality time series for New York, all with t-statistics in excess of 3.91, making these anomalies highly significant. The algorithm correctly identifies September 2001 as an additive outlier (2001:09 t=6.40) where mortality in that month was 1,628 higher than anticipated. This mortality event is likely caused by the September 11 tragedy and the detection of this mortality event provides confidence in our detection of other anomalies. 
 
-```{r MortalityNewYork, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly Detection for New York state mortality, 1999-2016.} The top panel contains the original time series (light gray) and the corrected, counter-factual time series in the absence of anomalies (blue). The red dots on the top panel correspond to the onset of detected anomalies. The bottom panel contains the magnitude and type of the outlier. We detect all three types of outliers in New York mortality data during period 1999-2016. We detect additive outliers (AO) in January 2000, September 2001, January 2005, and January 2013; temporary change (TC) outliers in February 2007 and January 2015; and a level shift (LS) starting in February 2004. Outliers range in significance from a low t-statistic of 3.91 in the TC 2015:01 to a high t-statistic of 6.40 in the AO outlier in 2001:09. \\label{fig:mortnewyork}")}
+In **\autoref{fig:mortnewhamp}a**, notice the strong level shift (LS) that occurs in February 2004 (2004:02 t=5.59) which prevented almost 870 deaths per month. This shift totals more than 144,000 averted deaths compared to the counter-factual time series and is the single largest mortality protective anomaly among all states. This translates to 4.5% fewer deaths than expected over the time period. What is driving this mortality protection? What policies did NY put into place that might have contributed to this considerable mortality reduction? What environmental conditions may have changed? These are the kinds of questions that arise from our analyses.
 
-plot(outlier.mort.ny,
-     cex.axis=0.8) +
-title(main = "New York - Monthly Mortality",
-      adj = 1)
+Contrast the mortality protection in New York with the enhanced mortality in New Hampshire (**\autoref{fig:mortnewhamp}b**). Here we detect two highly significant level shifts (LS) in the monthly mortality data, first in April 2010 and again in November 2014 (2010:04 t=3.51; 2014:11 t=6.68). These anomalies suggest New Hampshire experienced 9,700 more deaths (+14% more than expected) in a seven-year period beginning in early 2010. This is the single largest percentage mortality increase/decrease we detected among all states. Not coincidentally, NH has the second highest opioid-related mortality in the US [@beetham2019access] and it is reasonable that we detect this epidemic in our results.
+
+```{r MortalityNewHamp, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly Detection for New York (a) and New Hampshire (b) state mortality, 1999-2016.} The top part of each panel contains the original time series (light gray), the corrected, counter-factual time series in the absence of anomalies (blue), and the red dots correspond to the onset of detected anomalies. The bottom part of each panel contains the magnitude and type of the outlier in red. In New York (a), we detect additive outliers (AO) in January 2000, September 2001, January 2005, and January 2013; temporary change (TC) outliers in February 2007 and January 2015; and a level shift (LS) starting in February 2004. In New Hampshire (b), we detect two outliers, both level shift outliers (LS) in April 2010 and again in November 2014. These anomalies suggest New York experienced a significant mortality event in September 2001 and New Hampshire experienced approximately 9,700 more deaths than expected since 2010 or 14% more deaths in the state over just seven years. \\label{fig:mortnewhamp}")}
+
+a <-  function() {
+plot(outlier.mort.ny, cex = 0.8)
+title("New York - Mortality", adj = 0.9, line =2)
+}
+
+b <-  function() {
+  plot(outlier.mort.nh, cex = 0.8)
+  title("New Hampshire - Mortality", adj = 0.82,line =2)
+}
+
+plot_grid(ggdraw(a) ,
+               ggdraw(b), 
+               ncol=1,
+               labels= "auto")
 ```
 
-In **\autoref{fig:mortnewyork}**, notice the strong level shift (LS) that occurs in February 2004 (2004:02 t=5.59) which prevented almost 870 deaths per month. This shift totals more than 144,000 averted deaths compared to the counter-factual time series and is the single largest mortality protective anomaly among all states. This translates to 4.5% fewer deaths than expected over the time period. What is driving this mortality protection? What policies did NY put into place that might have contributed to this considerable mortality reduction? What environmental conditions may have changed? These are the kinds of questions that arise from our analyses.
 
-Contrast the mortality protection in New York with the enhanced mortality in New Hampshire (**\autoref{fig:mortnewhamp}**). Here we detect two highly significant level shifts (LS) in the monthly mortality data, first in April 2010 and again in November 2014 (2010:04 t=3.51; 2014:11 t=6.68). These anomalies suggest New Hampshire experienced 9,700 more deaths (+14% more than expected) in a seven-year period beginning in early 2010. This is the single largest percentage mortality increase/decrease we detected among all states. Not coincidentally, NH has the second highest opioid-related mortality in the US [@beetham2019access] and it is reasonable that we detect this epidemic in our results.
-
-```{r MortalityNewHamp, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly Detection for New Hampshire state mortality, 1999-2016.} Here we detect two outliers, both level shifts in outliers (LS) in April 2010 and again in November 2014. These anomalies suggest New Hampshire experienced approximately 9,700 more deaths than expected since 2010 or 14% more deaths in the state over just seven years. \\label{fig:mortnewhamp}")}
-
-plot(outlier.mort.nh,
-     cex.axis=0.8) +
-title(main = "New Hampshire - Monthly Mortality",
-      adj = 1)
-```
-
-In the case of New York and New Hampshire, some of the demographic anomalies have plausible explanations. It seems likely that New York’s AO anomaly in September 2001 is caused by the 9/11 tragedy and the rise in New Hampshire’s mortality starting in 2010 could be linked to the opioid epidemic. However, we detect numerous seemingly unexplainable demographic anomalies in other states. Figure 3 shows two such unexplained anomalies. 
 
 ## Fertility
 
-We begin with a clear temporary change (TC) outlier for fertility in Louisiana (**\autoref{fig:fertla}**). Here we detect two TC outliers, nearly back-to-back in 2005 (2005:08 *t* = `r prettyNum(outlier.fert.la$outliers$tstat[1], digits = 3)`; and 2005:10 *t* = `r prettyNum(outlier.fert.la$outliers$tstat[2], digits = 3)`), coinciding with the destruction of Hurricane Katrina from the same year. The migration associated with Hurricane Katrina has garnered most of the attention of demographers [@fussellRecoveryMigrationCity2014;@horiDisplacementDynamicsSouthern2009], but the hurricane had a very clear impact on fertility behaviors too, creating a mini "baby bust" in Louisiana. We estimate `r prettyNum(abs(sum(outlier.fert.la$y - outlier.fert.la$yadj)), digits = 0, big.mark = ",")` fewer births in Louisiana compared to the counterfactual, likely attributable to the Hurricane.
+We begin with a clear temporary change (TC) outlier for fertility in Louisiana (**\autoref{fig:fertla}a**). Here we detect two TC outliers, nearly back-to-back in 2005 (2005:08 *t* = `r prettyNum(outlier.fert.la$outliers$tstat[1], digits = 3)`; and 2005:10 *t* = `r prettyNum(outlier.fert.la$outliers$tstat[2], digits = 3)`), coinciding with the destruction of Hurricane Katrina from the same year. The migration associated with Hurricane Katrina has garnered most of the attention of demographers [@fussellRecoveryMigrationCity2014;@horiDisplacementDynamicsSouthern2009], but the hurricane had a very clear impact on fertility behaviors too, creating a mini "baby bust" in Louisiana. We estimate `r prettyNum(abs(sum(outlier.fert.la$y - outlier.fert.la$yadj)), digits = 0, big.mark = ",")` fewer births in Louisiana compared to the counterfactual, likely attributable to the Hurricane.
 
-```{r FertilityLouisiana, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Louisiana state fertility, 2003-2018.} Here we detect two outliers, back-to-back, likely resulting from Hurricane Katrina August and October 2005, representing a decrease of more than 4,400 births due to the hurricane. \\label{fig:fertla}")}
+We also highlight a level shift (LS) outlier for fertility in Connecticut. Here we detect a strong (*t*= `r prettyNum(outlier.fert.conn$outliers$tstat, digits = 3)`; `r prettyNum(outlier.fert.conn$outliers$coefhat, digits = 0)` births/month) level shift toward lower fertility beginning in August 2009 (2009:08) that continues through the end of the period (**\autoref{fig:fertla}b**). This LS toward lower fertility reduced the # of births by `r prettyNum(sum(outlier.fert.conn$y - outlier.fert.conn$yadj), digits = 0, big.mark = ",")` or `r percent(sum(outlier.fert.conn$y - outlier.fert.conn$yadj) / sum(outlier.fert.conn$yadj[80:180]))` lower than the counterfactual time series. The stock market crash of 2008, where the Dow Jones Industrial Average had the largest single-day loss up to that point, occured just 11 months before we detect a shift toward lower fertility. We believe the trend toward lower fertility in August 2009 and the stock market crash in September 2008 are linked.
 
-plot(outlier.fert.la,
-     cex.axis=0.8) +
-  title(main = "Louisiana - Monthly Fertility",
-        adj = 1)
-```
+```{r FertilityLouisiana, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Louisiana (a) and Connecticut (b) state fertility, 2003-2018.} In (a), we detect two outliers, back-to-back, likely resulting from Hurricane Katrina in August and October 2005, representing a decrease of more than 4,400 births due to the hurricane. In (b), we detect one outlier, a level shift outlier (LS) in August 2009. We believe this reduction is attributable to the stock market crash 11 months earlier. \\label{fig:fertla}")}
 
-We also highlight a level shift (LS) outlier for fertility in Connecticut. Here we detect a strong (*t*= `prettyNum(outlier.fert.conn$outliers$tstat, digits = 3)`; `r prettyNum(outlier.fert.conn$outliers$coefhat, digits = 0)` births/month) level shift toward lower fertility beginning in August 2009 (2009:08) that continues through the end of the period (**\autoref{fig:fertconn}**). This LS toward lower fertility reduced the # of births by `r prettyNum(sum(outlier.fert.conn$y - outlier.fert.conn$yadj), digits = 0, big.mark = ",")` or `r percent(sum(outlier.fert.conn$y - outlier.fert.conn$yadj) / sum(outlier.fert.conn$yadj[80:180]))` lower than the counterfactual time series. The stock market crash of 2008, where the Dow Jones Industrial Average had the largest single-day loss up to that point, occured just 11 months before we detect a shift toward lower fertility. We believe the trend toward lower fertility in August 2009 and the stock market crash in September 2008 are linked.
+a <-  function() {
+  plot(outlier.fert.la, cex.axis=0.8)
+  title(main = "Louisiana - Fertility", adj = 0.9)
+}
 
-```{r FertilityConnecticut, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.} Here we detect one outlier, an additive outlier (AO) in May 2014 ( \textit{t}=4.96), representing a 14% increase in expected births in that month. \\label{fig:fertconn}")}
+b <- function(){
+  plot(outlier.fert.conn, cex.axis=0.8) +
+  title(main = "Connecticut - Fertility", adj = 0.88)
+}
 
-plot(outlier.fert.conn,
-     cex.axis=0.8) +
-  title(main = "Connecticut - Monthly Fertility",
-        adj = 1)
+plot_grid(ggdraw(a) ,
+               ggdraw(b), 
+               ncol=1,
+               labels= "auto")
+
 ```
 
 ## Interesting Anomalous Fertility/Mortality events
-In the examples above, we highlighted four fertility/mortality anomalies with plausible explanations. However, these four anomalies are but a fraction of anomalies we detect. Here, we highlight four additional anomalies without easily identifiable explanations.
+In the examples above, we highlighted four fertility/mortality anomalies with plausible explanations. In the case of New York and New Hampshire, the mortality anomalies have plausible explanations. It seems likely that New York’s AO anomaly in September 2001 is caused by the 9/11 tragedy and the rise in New Hampshire’s mortality starting in 2010 could be linked to the opioid epidemic. Similarly, Louisiana's TC anomalies seem linked to Hurricanes Katrina and Rita while the LS anomaly in Connecticut's fertility appears linked to the Great Recession. However, we detect numerous seemingly unexplainable demographic anomalies in other states. **\autoref{fig:ferthawaii}** shows two such unexplained anomalies. 
+
+In **\autoref{fig:ferthawaii}a** we identify a single additive anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with a *t*-statistic of `r prettyNum(outlier.fert.hi$outliers$tstat, digits = 3)`, 14% above the counter-factual time series. This single, anomalous month is also the second highest monthly births in the time series. We have no plausible explanation for this anomaly. We do not believe this is simply a data error as the other extreme values, September 2008 and February 2005 with the highest and lowest recorded fertility respectively, were not identified as anomalous events. Even if we were to assume this anomaly resulted from data entry error, it remains an *unaltered* data error in the Hawaiian monthly fertility data.
+
+This is contrast to **\autoref{fig:ferthawaii}b**, where we identify a strange mortality reduction in Ohio (*t*-stat: `r prettyNum(outlier.mort.oh$outliers$tstat[7], digits = 3)`). This LS is more than 1,100 deaths per month less than the counterfactual time series, suggesting had nearly 40,000 fewer deaths since February 2015 than expected. This is the single-largest LS among all states. We could not identify the potential policies Ohio might have put into place to provide such a strong mortality protection.
+
+```{r AnomalyHawaii, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Hawaii state fertility (a) and Ohio state mortality (b).} Here we detect one outlier, an additive outlier (AO) in May 2014 in Hawaii (a), representing a large, unexplainable 14% increase in expected births in that month. We also detect a strong level shift (LS) reduction (b), representing a large, unexplainable reduction of nearly 40,000 deaths in Ohio.  \\label{fig:ferthawaii}")}
+
+a <-  function() {
+plot(outlier.fert.hi, cex.axis=0.8)
+  title(main = "Hawaii - Fertility", adj = 0.88)
+}
+
+b <-  function() {
+plot(outlier.mort.oh, cex.axis=0.8)
+  title(main = "Ohio - Mortality", adj = 0.9)
+}
 
 
-In **\autoref{fig:ferthawaii}** we identify a single additive anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with a *t*-statistic of 4.96, 14% above the counter-factual time series. This single, anomalous month is also the second highest monthly births in the time series. We have no plausible explanation for this anomaly. We do not believe this is simply a data error as the other extreme values, September 2008 and February 2005 with the highest and lowest recorded fertility respectively, were not identified as anomalous events. Even if we were to assume this anomaly resulted from data entry error, it remains an *unaltered* data error in the Hawaiian monthly fertility data.
-
-```{r AnomalyHawaii, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Hawaiian state fertility, 2003-2018.} Here we detect one outlier, an additive outlier (AO) in May 2014 ( \textit{t}=4.96), representing a 14% increase in expected births in that month. \\label{fig:ferthawaii}")}
-
-plot(outlier.fert.hi,
-     cex.axis=0.8) +
-  title(main = "Hawaii - Monthly Fertility",
-        adj = 1)
+plot_grid(ggdraw(a) ,
+               ggdraw(b), 
+               ncol=1,
+               labels= "auto")
 ```
 
-We detect a very interesting, unexplainable mortality anomaly in North Carolina (**\autoref{fig:fertmiss}**). Beginning in February 2008 , North Carolina saw a level shift (LS) (2008:02; *t*-stat = `r prettyNum(outlier.mort.nc$outliers$tstat[3], digits = 3)`) of 800 fewer deaths per month until the end of the period. Granted, the decade after the LS still saw three mortality anomalies that resulted in additional, unexpected deaths in 2009, 2012, and 2017, the LS is still a remarkable mortality reduction of nearly 100k (`r prettyNum(sum(outlier.mort.nc$y[62:180] - outlier.mort.nc$yadj[62:180]), digits = 0, big.mark = ",")`) deaths over 10 years! While North Carolina saw the raw count of mortality remain constant or slightly reduce since 2008, the state grew from 9.3 million residents in 2008 to 10.4 million in 2018. In spite of its growing population, North Carolina has, rather miraculously, *reduced* its overall mortality risk.
-```{r AnomalyMississippi, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in North Carolina state mortality, 1999-2018.} Here we detect one outlier, an additive outlier (AO) in May 2014 ( \textit{t}=4.96), representing a 14% increase in expected births in that month. \\label{fig:fertmiss}")}
-
-plot(outlier.mort.nc,
-     cex.axis=0.8) +
-  title(main = "North Carolina - Monthly Mortality",
-        adj = 1)
-```
-
-Hawaii - AO
-X33 - LS
-X28
-X22
-X20
-X05
 
 
 
