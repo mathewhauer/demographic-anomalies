@@ -16,7 +16,7 @@ dat <-
 countylist = unique(dat$location)
 
 df <- data.frame()
-# df_sums <- data.frame()
+df_sums <- data.frame()
 sigma <- 3.5
 
 for(this.state in unique(countylist)){
@@ -24,6 +24,7 @@ for(this.state in unique(countylist)){
   print(this.state)
   tryCatch({
     df2<- setNames(data.frame(matrix(ncol = 5, nrow = 0)), c("type", "ind", "time", "coefhat", "tstat"))
+    
     state <- this.state
     dat2 <- filter(dat, location == state)
     dat3 <- ts(dat2$Target, start = year(min(dat$Year)), end = c(year(max(dat$Year)),12), frequency = 12)
@@ -31,6 +32,12 @@ for(this.state in unique(countylist)){
     df2<- outlier.county$outliers
     df2$location <- state
     df <- bind_rows(df, df2)
+    
+    df_sums2 <- setNames(data.frame(matrix(ncol=3, nrow=1)), c("y", "yadj", "loc"))
+    df_sums2$ydiff <- sum(outlier.county$effects)
+    df_sums2$yadj <- sum(outlier.county$yadj)
+    df_sums2$loc <- this.state
+    
   } , error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
   
 }

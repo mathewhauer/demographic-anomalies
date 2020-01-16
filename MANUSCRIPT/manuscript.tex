@@ -287,6 +287,25 @@ bely explanation.
 \hypertarget{overall-anomalies}{%
 \subsection{Overall Anomalies}\label{overall-anomalies}}
 
+\textbf{\autoref{sumtable}} reports the overall stuff.
+
+\begin{table}
+
+\caption{\label{tab:unnamed-chunk-1}\textbf{Summary by Anomaly Type and Demographic Component.} n refers to the number of anomolies for each type and demogrpahic component, States refers to the number of unique states exhibiting that specific Type-demogrpahic component. \label{sumtable}}
+\centering
+\begin{tabular}[t]{lrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Fertility} & \multicolumn{2}{c}{Mortality} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
+Type & n & States & n & States\\
+\midrule
+AO & 9 & 9 & 85 & 38\\
+LS & 6 & 4 & 22 & 17\\
+TC & 7 & 6 & 49 & 28\\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \hypertarget{mortality}{%
 \subsection{Mortality}\label{mortality}}
 
@@ -325,7 +344,7 @@ this epidemic in our results.
 
 \begin{figure}
 \centering
-\includegraphics{manuscript_files/figure-latex/MortalityNewHamp-1.pdf}
+\includegraphics{manuscript_files/figure-latex/MortalityAnomalies-1.pdf}
 \caption{\textbf{Anomaly Detection for New York (a) and New Hampshire (b) state mortality, 1999-2016.}
 The top part of each panel contains the original time series (light
 gray), the corrected, counter-factual time series in the absence of
@@ -372,7 +391,7 @@ market crash in September 2008 are linked.
 
 \begin{figure}
 \centering
-\includegraphics{manuscript_files/figure-latex/FertilityLouisiana-1.pdf}
+\includegraphics{manuscript_files/figure-latex/FertilityAnomalies-1.pdf}
 \caption{\textbf{Anomaly detection in Louisiana (a) and Connecticut (b) state fertility, 2003-2018.}
 In (a), we detect two outliers, back-to-back, likely resulting from
 Hurricane Katrina in August and October 2005, representing a decrease of
@@ -420,7 +439,7 @@ to provide such a strong mortality protection.
 
 \begin{figure}
 \centering
-\includegraphics{manuscript_files/figure-latex/AnomalyHawaii-1.pdf}
+\includegraphics{manuscript_files/figure-latex/TrueAnomalies-1.pdf}
 \caption{\textbf{Anomaly detection in Hawaii state fertility (a) and Ohio state mortality (b).}
 Here we detect one outlier, an additive outlier (AO) in May 2014 in
 Hawaii (a), representing a large, unexplainable 14\% increase in

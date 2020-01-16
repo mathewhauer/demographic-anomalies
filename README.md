@@ -1,7 +1,7 @@
 # PAPER TITLE
 
 # Introduction
-Here we provide the data and code for:  [**PAPER TITLE**](https://github.com/mathewhauer/demographic-anomalies/blob/master/MANUSCRIPT/manuscript.pdf)
+Here we provide the data and code for:  [**Effects without a Cause: The Search for Demographic Anomalies**](https://github.com/mathewhauer/demographic-anomalies/blob/master/MANUSCRIPT/manuscript.pdf)
 
 ### Citation
 
@@ -12,9 +12,9 @@ Here we provide the data and code for:  [**PAPER TITLE**](https://github.com/mat
 # Abstract
 > Lorem Ipsum
 
-![Main Figure](MANUSCRIPT/manuscript_files/figure-latex/pressure-1.png "Main Figure")
+![Main Figure](MANUSCRIPT/manuscript_files/figure-latex/MortalityAnomalies-1.png "Main Figure")
 
-**Figure Title.** Description of Figure.
+**Anomaly Detection for New York (a) and New Hampshire (b) state mortality, 1999-2016.** The top part of each panel contains the original time series (light gray), the corrected, counter-factual time series in the absence of anomalies (blue), and the red dots correspond to the onset of detected anomalies. The bottom part of each panel contains the magnitude and type of the outlier in red. In New York (a), we detect additive outliers (AO) in January 2000, September 2001, January 2005, and January 2013; temporary change (TC) outliers in February 2007 and January 2015; and a level shift (LS) starting in February 2004. In New Hampshire (b), we detect two outliers, both level shift outliers (LS) in April 2010 and again in November 2014. These anomalies suggest New York experienced a significant mortality event in September 2001 and New Hampshire experienced approximately 9,700 more deaths than expected since 2010 or 14% more deaths in the state over just seven years.
 
 To see all of the underlying code and the results, [click here](http://htmlpreview.github.io/?https://github.com/mathewhauer/demographic-anomalies/blob/master/MANUSCRIPT/reproduce.html)
 
