@@ -47,6 +47,7 @@ pkgs <- c(
   "tmaptools",     # Cartographic tools
   "tigris",        # US shapefiles
   "censusapi",     # Census Data
+  "tidycensus",
   "sp",            # Spatial Objects
   "grid",          # Plot Grids
   "kableExtra",    # Pretty Tables
@@ -62,7 +63,8 @@ pkgs <- c(
   "CausalImpact",
   "bsts",
   "lubridate",
-  "tsoutliers"
+  "tsoutliers",
+  "numform"
 )
 
 # Install missing packages

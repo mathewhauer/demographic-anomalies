@@ -34,10 +34,13 @@ for(this.state in unique(countylist)){
     df <- bind_rows(df, df2)
     
     df_sums2 <- setNames(data.frame(matrix(ncol=3, nrow=1)), c("y", "yadj", "loc"))
+    df_sums2$y <- sum(outlier.county$y)
     df_sums2$ydiff <- sum(outlier.county$effects)
+    df_sums2$ydiffabs <- sum(abs(outlier.county$effects))
     df_sums2$yadj <- sum(outlier.county$yadj)
     df_sums2$loc <- this.state
     
+    df_sums <- bind_rows(df_sums, df_sums2)
   } , error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
   
 }
@@ -47,7 +50,7 @@ for(this.state in unique(countylist)){
 #          excessmortper = (excessmort/y)*100)
 
 write_rds(df, "./R/DATA-PROCESSED/fertility_anomalies")
-# write_rds(df_sums2, "./R/DATA-PROCESSED/fertility_anomalies_sums")
+write_rds(df_sums, "./R/DATA-PROCESSED/fertility_anomalies_sums")
 
 dat <- 
   ###MORTALITY 
@@ -65,6 +68,8 @@ dat <-
 countylist = unique(dat$location)
 
 df <- data.frame()
+df_sums <- data.frame()
+
 sigma <- 3.5
 
 for(this.state in unique(countylist)){
@@ -79,11 +84,21 @@ for(this.state in unique(countylist)){
     df2<- outlier.county$outliers
     df2$location <- state
     df <- bind_rows(df, df2)
+    
+    
+    df_sums2 <- setNames(data.frame(matrix(ncol=3, nrow=1)), c("y", "yadj", "loc"))
+    df_sums2$y <- sum(outlier.county$y)
+    df_sums2$ydiff <- sum(outlier.county$effects)
+    df_sums2$ydiffabs <- sum(abs(outlier.county$effects))
+    df_sums2$yadj <- sum(outlier.county$yadj)
+    df_sums2$loc <- this.state
+    df_sums <- bind_rows(df_sums, df_sums2)
+    
   } , error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
   
 }
 write_rds(df, "./R/DATA-PROCESSED/mortality_anomalies")
-# write_rds(df_sums, "./R/DATA-PROCESSED/mortality_anomalies_sum")
+write_rds(df_sums, "./R/DATA-PROCESSED/mortality_anomalies_sum")
 
 # 
 # 

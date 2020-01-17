@@ -255,7 +255,12 @@ which relies on some critical value above which an outlier at time point
 m is considered spurious. Based on Chen and Liu's
 \citeyearpar{chen1993joint} recommendation, we set a critical value of
 3.5 which generally minimizes the possibility of Type I errors or false
-positive outliers. Outliers are reported using a simple t-statistic.
+positive outliers.
+
+We report outliers using a simple t-statistic and report the size of the
+outlier, or its impact on the time series, by subtracting \(\hat{y}\),
+the adjusted time series without outliers removed, from \(y\), the
+original, unadjusted time series.
 
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
@@ -287,24 +292,49 @@ bely explanation.
 \hypertarget{overall-anomalies}{%
 \subsection{Overall Anomalies}\label{overall-anomalies}}
 
-\textbf{\autoref{sumtable}} reports the overall stuff.
-
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-1}\textbf{Summary by Anomaly Type and Demographic Component.} n refers to the number of anomolies for each type and demogrpahic component, States refers to the number of unique states exhibiting that specific Type-demogrpahic component. \label{sumtable}}
+\caption{\label{tab:unnamed-chunk-1}\textbf{Summary by Demographic Component.}  refers to the number of anomolies for each type and demographic component, States refers to the number of unique states exhibiting that specific Type-demographic component. \label{sumtable}}
 \centering
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}[t]{lrllrrr}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Fertility} & \multicolumn{2}{c}{Mortality} \\
-\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-5}
-Type & n & States & n & States\\
+Component & Anomalies & $y$ & $\hat{y}$ & $y-\hat{y}$ & $|y-\hat{y}|$ & \% of Total\\
 \midrule
-AO & 9 & 9 & 85 & 38\\
-LS & 6 & 4 & 22 & 17\\
-TC & 7 & 6 & 49 & 28\\
+Fertility & 22 & 25.48M & 25.68M & -202,217 & 226,476 & 0.889\\
+Mortality & 156 & 43.57M & 43.52M & 48,535 & 627,364 & 1.440\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\textbf{\autoref{sumtable}} report the overall number of anomalies we
+detect of each type for births and deaths and some summary statistics
+across all anomaly types. We find considerably more mortality anomalies
+(n = 156) than fertility anomalies (n = 22). This is likely because
+mortality is more easily subject to instantaneous change compared with
+fertility. Changes in fertility should theoretically manifest
+approximately 9-months after change.
+
+We also find more anomalous deaths (627,364) than anomalous births
+(226,476). Fertility anomalies overwhelmingly tended toward lower
+fertility, with only a few fertility anomalies yielding more births.
+Conversely, mortality anomalies tended to be more evenly split between
+positive and negative anomalies, but tended toward more deaths rather
+than less deaths. These anomalous deaths and births account for 1.44\%
+and 0.889\% over the entire time series, respectively.
+
+\textbf{\autoref{fig:summap}} maps these results. Three states exhibited
+neither mortality nor fertility anomalies: Alaska, North Dakota, and
+South Dakota. Another nine states exhibited just a single anomaly (DE,
+DC, ID, IL, KS, NV, NM, UT, and WY). Both New York and Massachusetts
+exhibited the most anomalies with nine.
+
+\begin{figure}
+\centering
+\includegraphics{manuscript_files/figure-latex/AnomalyMap-1.pdf}
+\caption{\textbf{Summary of Anomalies by type, demographic component, and State.}
+We observe much fewer fertility anomalies than mortality anomalies.
+\label{fig:summap}}
+\end{figure}
 
 \hypertarget{mortality}{%
 \subsection{Mortality}\label{mortality}}

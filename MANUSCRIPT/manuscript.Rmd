@@ -49,6 +49,7 @@ library(knitr)
 read_chunk('../R/SCRIPTS/000-Libraries.R')
 read_chunk('../R/SCRIPTS/001-DataLoad.R')
 read_chunk('../R/SCRIPTS/002-StatesAnalysis.R')
+read_chunk('../R/SCRIPTS/003-SummaryStats.R')
 ```
 
 ```{r libraries, include=FALSE}
@@ -57,8 +58,8 @@ read_chunk('../R/SCRIPTS/002-StatesAnalysis.R')
 ```{r DataLoad, include=FALSE}
 ```
 
-<!-- # ```{r StatesAnalysis, include=FALSE} -->
-<!-- # ``` -->
+```{r SumStats, include=FALSE}
+```
 
 # Introduction
 
@@ -99,7 +100,9 @@ An outlier is detected using a regression equation
 
 $$ \pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \alpha_t $$
 
-where $\pi(B)=\sum_{i=o}^{inf} \pi_iB^i$. The identification of outliers then involves a three step process to (1) identify all potential outliers, $t_j$ and $L_j (B)$, (2) joint estimates of model parameters and outlier effects are computed to identify potentially spurious outliers, and (3) the outliers and effects are re-estimated without spurious outliers. Of importance here is step 2, which relies on some critical value above which an outlier at time point m is considered spurious. Based on Chen and Liu’s [-@chen1993joint] recommendation, we set a critical value of 3.5 which generally minimizes the possibility of Type I errors or false positive outliers. Outliers are reported using a simple t-statistic.
+where $\pi(B)=\sum_{i=o}^{inf} \pi_iB^i$. The identification of outliers then involves a three step process to (1) identify all potential outliers, $t_j$ and $L_j (B)$, (2) joint estimates of model parameters and outlier effects are computed to identify potentially spurious outliers, and (3) the outliers and effects are re-estimated without spurious outliers. Of importance here is step 2, which relies on some critical value above which an outlier at time point m is considered spurious. Based on Chen and Liu’s [-@chen1993joint] recommendation, we set a critical value of 3.5 which generally minimizes the possibility of Type I errors or false positive outliers. 
+
+We report outliers using a simple t-statistic and report the size of the outlier, or its impact on the time series, by subtracting $\hat{y}$, the adjusted time series without outliers removed, from $y$, the original, unadjusted time series.
 
 ## Data
 
@@ -111,39 +114,78 @@ We detect numerous anomalous mortality and fertility events at the US state-leve
 
 ## Overall Anomalies
 
-**\autoref{sumtable}** reports the overall stuff.
 
 ```{r, echo = FALSE}
 
- anom_mort <- read_rds("../R/DATA-PROCESSED/mortality_anomalies") %>%
-   na.omit %>%
-   mutate(component = "Mortality")
-
- anom_fert <- read_rds("../R/DATA-PROCESSED/fertility_anomalies") %>%
-   na.omit %>%
-   mutate(component = "Fertility")
-
- anom <- rbind(anom_mort, anom_fert)
-
- types <- anom %>%
-   group_by(type, component) %>%
-   dplyr::summarise(n = n(),
-                    states =  n_distinct(location)) %>%
-   ungroup() %>%
-   gather(test, stat_, n:states) %>%
-   mutate(variable = paste0(component, "_", test)) %>%
-   ungroup() %>%
-   dplyr::select(-component, -test) %>%
-   spread(variable, stat_)
-
- kable(types,
+sums2 <- sums %>%
+  dplyr::select(percent_anom = `\\% of Total`, everything())
+kable(sums,
        "latex",
        booktabs = T,
-       col.names = c( "Type","n","States","n","States"),
-       caption = "\\textbf{Summary by Anomaly Type and Demographic Component.} n refers to the number of anomolies for each type and demogrpahic component, States refers to the number of unique states exhibiting that specific Type-demogrpahic component. \\label{sumtable}") %>%
-   kable_styling(position = "center") %>%
-   add_header_above(c(" "=1, "Fertility" = 2, "Mortality" = 2))
+       format.args = list(big.mark = ","),
+       escape = FALSE,
+       caption = "\\textbf{Summary by Demographic Component.}  refers to the number of anomolies for each type and demographic component, States refers to the number of unique states exhibiting that specific Type-demographic component. \\label{sumtable}") %>%
+   kable_styling(position = "center")
 
+```
+
+**\autoref{sumtable}** report the overall number of anomalies we detect of each type for births and deaths and some summary statistics across all anomaly types. We find considerably more mortality anomalies (n = `r paste(sums[2,2])`) than fertility anomalies (n = `r paste(sums[1,2])`). This is likely because mortality is more easily subject to instantaneous change compared with fertility. Changes in fertility should theoretically manifest approximately 9-months after change. 
+
+We also find more anomalous deaths (`r paste(prettyNum(sums[2,6], digits = 0, big.mark = ","))`) than anomalous births (`r paste(prettyNum(sums[1,6], digits = 0, big.mark = ","))`). Fertility anomalies overwhelmingly tended toward lower fertility, with only a few fertility anomalies yielding more births. Conversely, mortality anomalies tended to be more evenly split between positive and negative anomalies, but tended toward more deaths rather than less deaths. These anomalous deaths and births account for `r sums2$percent_anom[2]`% and `r sums2$percent_anom[1]`% over the entire time series, respectively.
+
+**\autoref{fig:summap}** maps these results. Three states exhibited neither mortality nor fertility anomalies: Alaska, North Dakota, and South Dakota. Another nine states exhibited just a single anomaly (DE, DC, ID, IL, KS, NV, NM, UT, and WY). Both New York and Massachusetts exhibited the most anomalies with nine.
+
+
+
+```{r AnomalyMap, echo= FALSE, message = FALSE, warning = FALSE, fig.height=7, fig.cap= paste("\\textbf{Summary of Anomalies by type, demographic component, and State.} We observe much fewer fertility anomalies than mortality anomalies. \\label{fig:summap}")}
+
+data(state_laea)
+anom_mort <- read_rds("../R/DATA-PROCESSED/mortality_anomalies") %>%
+  na.omit %>%
+  mutate(component = "Mortality")
+
+anom_fert <- read_rds("../R/DATA-PROCESSED/fertility_anomalies") %>%
+  na.omit %>%
+  mutate(component = "Fertility")
+
+anom_mort2 <- rbind(anom_mort, anom_fert) %>%
+  group_by(type, location, component) %>%
+  dplyr::summarise(Anomalies =  n()) %>%
+  mutate(ident = paste0(component, " - ", type),
+         GEOID = substr(location, 2,3)) %>%
+  ungroup() %>%
+  dplyr::select(GEOID, Anomalies, ident) %>%
+  spread(ident, Anomalies) %>%
+    mutate_all(funs(replace_na(.,0)))
+
+
+states <- left_join(state_laea, anom_mort2) %>%
+  gather(ident, Anomalies, `Fertility - AO`:`Mortality - TC`) %>%
+  mutate_all(funs(replace_na(.,0))) %>%
+  mutate(Anomalies = factor(Anomalies))
+
+states$ident2 <- factor(
+  states$ident,
+  levels = c("Mortality - AO", "Fertility - AO", 
+             "Mortality - TC", "Fertility - TC", 
+             "Mortality - LS", "Fertility - LS")
+)
+
+colorpal <- c("#ffffff", "#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494")
+
+  ggplot(data=states) +
+  geom_sf(aes(fill = Anomalies),  lwd = 1/2) +
+  theme_bw() +
+  theme(axis.title=element_blank(),
+        axis.text=element_blank(),
+        axis.ticks=element_blank(),
+        legend.position="bottom"
+  )+
+  guides(fill=guide_legend(nrow=1,byrow=TRUE)) +
+  facet_wrap(~ident2, ncol=2) +
+    scale_fill_manual(name = "# of Anomalies", values = colorpal) +
+    
+  NULL
 ```
 
 ## Mortality 
