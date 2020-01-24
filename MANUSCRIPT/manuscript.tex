@@ -65,8 +65,8 @@
 
 \if0\blind
 {
-  \title{\bf Causal Inference in Population Trends: A Technique for finding
-Demographic Anomalies in Big Data}
+  \title{\bf Causal Inference in Population Trends: Searching for Demographic
+Anomalies in Big Data}
 
   \author{
         Mathew E. Hauer \thanks{Thanks y'all!} \\
@@ -83,8 +83,8 @@ Demographic Anomalies in Big Data}
   \bigskip
   \bigskip
   \begin{center}
-    {\LARGE\bf Causal Inference in Population Trends: A Technique for finding
-Demographic Anomalies in Big Data}
+    {\LARGE\bf Causal Inference in Population Trends: Searching for Demographic
+Anomalies in Big Data}
   \end{center}
   \medskip
 } \fi
@@ -99,16 +99,16 @@ inference techniques and abductive reasoning to identify fertility and
 mortality anamolies in state-level data trends by investigating
 demographic time series data since 1999. In demonstrating our technique,
 we uncover real spikes and dips in fertility and mortality over time,
-distinguished from regular trend variations. We show that 38 states
-exhibited at least one mortality anomaly over time, totalling more than
-318,000 additional deaths, while an additional six states exhibited
-periods of decline resuling in 164,000 fewer deaths. Twelve states
+distinguished from regular trend variations. We show that 36 states
+exhibited at least one mortality anomaly over time, totalling nearly
+300,000 additional deaths, while an additional seven states exhibited
+periods of decline resuling in 250,000 fewer deaths. Ten states
 exhibited real, marked periods of declines in fertility, totalling more
-than 240,000 fewer births than expected, and eleven states had periods
-of excess births, resulting in an addition 134,000 births. Our results
-show how researchers can detect demographic anomalies in trend data and
-use those anomalies as a beginning point for further investigation into
-the causes.
+than 214,000 fewer births than expected, and 8 states had periods of
+excess births, resulting in an addition 12,000 births. Our results show
+how researchers can detect demographic anomalies in trend data and use
+those anomalies as a beginning point for further investigation into the
+causes.
 \end{abstract}
 
 \noindent%
@@ -298,7 +298,7 @@ bely explanation.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-1}\textbf{Summary by Demographic Component.}  refers to the number of anomolies for each type and demographic component, States refers to the number of unique states exhibiting that specific Type-demographic component. \label{sumtable}}
+\caption{\label{tab:unnamed-chunk-2}\textbf{Summary by Demographic Component.}  refers to the number of anomolies for each type and demographic component, States refers to the number of unique states exhibiting that specific Type-demographic component. \label{sumtable}}
 \centering
 \begin{tabular}[t]{lrllrrr}
 \toprule
@@ -312,21 +312,22 @@ Mortality & 156 & 43.57M & 43.52M & 48,535 & 627,364 & 1.440\\
 
 \textbf{\autoref{sumtable}} report the overall number of anomalies we
 detect of each type for births and deaths and some summary statistics
-across all anomaly types. We find considerably more mortality anomalies
-(n = 156) than fertility anomalies (n = 22). Given that anomalies are
-always the produce of events \citep{Song2018ACM}, the finding of more
-mortality than fertility anomalies is not surprising. Mortality is
-likely to spike in response to a catastrophic event (like an earthquake
-or terrorist attack) while the effects of a catastrophic event on
-fertility is less predictable. One reason for this is that fertility is
-linked to human decision-making more directly than mortality
-\citep{stein2014couples} which results in more varied outcomes, so, for
-example, researchers find that catastrophic weather events can increase
-childbearing among those who already have a child, but not among the
-childless \citep{Evans2008Hurricanebirth}. Some events, like the 1995
-Oklahoma City bombings, resulted in both fertility and mortality
-changes. However, changes in fertility manifest over a longer time
-horizon after an event, and the relationship between a
+across all anomaly types and \textbf{\autoref{fig:summap}} maps these
+results. We find considerably more mortality anomalies (n = 156) than
+fertility anomalies (n = 22). Given that anomalies are always the
+product of events \citep{Song2018ACM}, finding more mortality than
+fertility anomalies is not surprising. Mortality is likely to spike in
+response to a catastrophic event (like an earthquake or terrorist
+attack) or due to a disease outbreak while the effects of a catastrophic
+event on fertility is less predictable. One reason for this is that
+fertility is linked to human decision-making more directly than
+mortality \citep{stein2014couples} which results in more varied
+outcomes, so, for example, researchers find that catastrophic weather
+events can increase childbearing among those who already have a child,
+but not among the childless \citep{Evans2008Hurricanebirth}. Some
+events, like the 1995 Oklahoma City bombings, resulted in both fertility
+and mortality changes. However, changes in fertility manifest over a
+longer time horizon after an event, and the relationship between a
 fertility-inducing event and behavior change is less strong than the
 relationship between a mortality-inducing event (such as a terrorist
 incident) and death \citep{Rodgers2005OKBombing}. Of course, not all
@@ -336,7 +337,7 @@ have documented that more commonplace events such as massive layoff
 \citep{Livingston2017Cannabis} can also create anomalies in mortality
 patterns, but we have not found such evidence for fertility.
 
-Consistent with more anomalies across the time lines, we find more
+Consistent with more anomalies across the time series, we find more
 anomalous deaths (627,364) than anomalous births (226,476). Fertility
 anomalies overwhelmingly tend toward lower fertility, with only a few
 fertility anomalies yielding more births. This is consistent with
@@ -348,15 +349,15 @@ less deaths. Again, this is not surprising, as the kinds of events that
 increase death (e.g., plant closings are associated with increased
 opioid death \citep{Venkataramani2019}) are more common than the events
 that decrease death (e.g., cannabis legalization is associated with
-decreased opioid deaths \citep{Livingston2017Cannabis}) These anomalous
+decreased opioid deaths \citep{Livingston2017Cannabis}). These anomalous
 deaths and births account for 1.44\% and 0.889\% over the entire time
 series, respectively.
 
-\textbf{\autoref{fig:summap}} maps these results. Three states exhibited
-neither mortality nor fertility anomalies: Alaska, North Dakota, and
-South Dakota. Another nine states exhibited just a single anomaly (DE,
-DC, ID, IL, KS, NV, NM, UT, and WY). Both New York and Massachusetts
-exhibited the most anomalies with nine.
+As \textbf{\autoref{fig:summap}} shows, three states exhibited neither
+mortality nor fertility anomalies: Alaska, North Dakota, and South
+Dakota. Another nine states exhibited just a single anomaly (DE, DC, ID,
+IL, KS, NV, NM, UT, and WY). Both New York and Massachusetts exhibited
+the most anomalies with nine.
 
 \begin{figure}
 \centering
@@ -371,49 +372,49 @@ We observe much fewer fertility anomalies than mortality anomalies.
 
 Since the purpose of our paper is to demonstrate how demographers can
 make use of causal inference technique, we will not discuss all of our
-findings in this paper. Instead, we will use a few cases for
+findings here, in this paper. Instead, we will use a few cases for
 illustration. For mortality, we will use New York State as an example
 (\textbf{\autoref{fig:mortnewhamp}a}). We identify seven anomalies in
-the mortality time series for New York, all with t-statistics in excess
-of 3.91, making these anomalies unlikely to be due to chance. The
+the mortality time series for New York, all with \emph{t}-statistics in
+excess of 3.91, making these anomalies unlikely to be due to chance. The
 algorithm correctly identifies September 2001 as an additive outlier
-(2001:09 t=6.40) where mortality in that month was 1,628 higher than
-anticipated. This mortality event is likely caused by the September 11
-tragedy and the detection of this mortality event provides confidence in
-our detection of other anomalies.
+(2001:09 \emph{t}= 6.396) where there were 1,628 more deaths in that
+month than anticipated. This mortality event is likely caused by the
+September 11 tragedy and the detection of this mortality event provides
+confidence in our detection of other anomalies.
 
 In \textbf{\autoref{fig:mortnewhamp}a}, notice the strong level shift
-(LS) that occurs in February 2004 (2004:02 t=5.59) which prevented
-almost 870 deaths per month. This shift totals more than 144,000 averted
-deaths compared to the counter-factual time series and is the single
-largest mortality protective anomaly among all states. This translates
-to 4.5\% fewer deaths than expected over the time period. What is
-driving this mortality protection? What policies did NY put into place
-that might have contributed to this considerable mortality reduction?
-What environmental conditions may have changed? These are the kinds of
-questions that arise from our analyses. The purpose of our paper is not
-to answer these questions, but our findings underscore the need for more
-research that takes an abductive approach. By identifying anomalies
-through an inductive process, researchers can then look for underlying
-causes. Once those causes are identified, researchers can then use a
-deductive process to see if such events predict other (or future)
-anomalies.
+(LS) that occurs in February 2004 (2004:02 \emph{t}= -5.594) which
+prevented 869 deaths per month. This shift totals more than 144,000
+averted deaths compared to the counter-factual time series and is the
+single largest mortality protective anomaly among all states. This
+translates to 6.90\% fewer deaths than expected over the time period.
+What is driving this mortality protection? What policies did NY put into
+place that might have contributed to this considerable mortality
+reduction? What environmental conditions may have changed? These are the
+kinds of questions that arise from our analyses. The purpose of our
+paper is not to answer these questions, but our findings underscore the
+need for more research that takes an abductive approach. By identifying
+anomalies through an inductive process, researchers can then look for
+underlying causes. Once those causes are identified, researchers can
+then use a deductive process to see if such events predict other (or
+future) anomalies.
 
-To see the potential for combinging abductive reasoning with causal
+To see the potential for combining abductive reasoning with causal
 inference, contrast the mortality protection in New York with the
 enhanced mortality in New Hampshire
 (\textbf{\autoref{fig:mortnewhamp}b}). In New Hampshire we detect two
 significant level shifts (LS) in the monthly mortality data, first in
-April 2010 and again in November 2014 (2010:04 t=3.51; 2014:11 t=6.68).
-These anomalies suggest New Hampshire experienced 9,700 more deaths
-(+14\% more than expected) in a seven-year period beginning in early
-2010. These are events not experienced by neighborhing states during the
-same time period, and this is the single largest percentage mortality
-increase/decrease we detected among all states. Not coincidentally, NH
-has the second highest opioid-related mortality in the US
-\citep{beetham2019access} and it is likely that we detect this epidemic
-in our results. Isolating these anomalies and testing them against
-opioid sales data might yeild intriguing results.
+April 2010 and again in November 2014 (2010:04 \emph{t}= 3.51; 2014:11
+\emph{t}= 6.68). These anomalies suggest New Hampshire experienced 8,159
+more deaths (+9.24\% more than expected) in a seven-year period
+beginning in early 2010. These are events not experienced by neighboring
+states during the same time period, and this is the single largest
+percentage mortality increase/decrease we detected among all states. Not
+coincidentally, NH has the second highest opioid-related mortality in
+the US \citep{beetham2019access} and it is likely that we detect this
+epidemic in our results. Isolating these anomalies and testing them
+against opioid sales data might yield intriguing results.
 
 \begin{figure}
 \centering
@@ -441,10 +442,10 @@ experienced approximately 9,700 more deaths than expected since 2010 or
 To illustrate how researchers can examine fertility anomalies, we begin
 with a clear temporary change (TC) outlier for fertility in Louisiana
 (\textbf{\autoref{fig:fertla}a}). Here we detect two TC outliers, nearly
-back-to-back in 2005 (2005:08 \emph{t} = -6; and 2005:10 \emph{t} = -5),
-coinciding with the destruction of Hurricane Katrina from the same year.
-The migration associated with Hurricane Katrina has garnered most of the
-attention of demographers
+back-to-back in 2005 (2005:08 \emph{t} = -6.002; and 2005:10 \emph{t} =
+-4.997), coinciding with the destruction of Hurricane Katrina from the
+same year. The migration associated with Hurricane Katrina has garnered
+most of the attention of demographers
 \citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
 but the hurricane had a very clear impact on fertility behaviors too,
 creating a mini ``baby bust'' in Louisiana with the departure of many
@@ -453,14 +454,14 @@ Louisiana compared to the counterfactual, likely attributable to the
 Hurricane.
 
 We also highlight a level shift (LS) outlier for fertility in
-Connecticut. Here we detect a strong (\emph{t}= -3.71; -285
+Connecticut. Here we detect a strong (\emph{t}= -3.71 for -285
 births/month) level shift toward lower fertility beginning in August
 2009 (2009:08) that continues through the end of the period
 (\textbf{\autoref{fig:fertla}b}). This LS toward lower fertility reduced
-the \# of births by -28,752 or -8.57\% lower than the counterfactual
+the \# of births by -28,752 or 8.57\%) lower than the counterfactual
 time series. The stock market crash of 2008, where the Dow Jones
 Industrial Average had the largest single-day loss up to that point,
-occured just 11 months before we detect a shift toward lower fertility.
+occurred just 11 months before we detect a shift toward lower fertility.
 It is possible that the trend toward lower fertility in August 2009 and
 the stock market crash in September 2008 are linked, although, as stated
 previously, we are speculating only to illustrate how causal inference
@@ -496,7 +497,7 @@ unexplained anomalies.
 
 In \textbf{\autoref{fig:ferthawaii}a} we identify a single additive
 anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with
-a \emph{t}-statistic of 4.96, 14\% above the counter-factual time
+a \emph{t}-statistic of 4.96, -14.9\% above the counter-factual time
 series. This single, anomalous month is also the second highest monthly
 births in the time series. We have no plausible explanation for this
 anomaly. We do not believe this is simply a data error as the other
@@ -508,7 +509,7 @@ fertility data.
 
 This is contrast to \textbf{\autoref{fig:ferthawaii}b}, where we
 identify a strange mortality reduction in Ohio (\emph{t}-stat: -4.27).
-This LS is more than 1,100 deaths per month less than the counterfactual
+This LS is more than 1,157 deaths per month less than the counterfactual
 time series, suggesting had nearly 40,000 fewer deaths since February
 2015 than expected. This is the single-largest LS among all states. We
 could not identify the potential policies Ohio might have put into place
