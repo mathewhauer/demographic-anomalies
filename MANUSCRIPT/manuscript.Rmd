@@ -148,7 +148,7 @@ $$ \pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \al
 
 where $\pi(B)=\sum_{i=o}^{inf} \pi_iB^i$. The identification of outliers then involves a three step process to (1) identify all potential outliers, $t_j$ and $L_j (B)$, (2) joint estimates of model parameters and outlier effects are computed to identify potentially spurious outliers, and (3) the outliers and effects are re-estimated without spurious outliers. Of importance here is step 2, which relies on some critical value above which an outlier at time point m is considered spurious. Based on Chen and Liu’s [-@chen1993joint] recommendation, we set a critical value of 3.5 which generally minimizes the possibility of Type I errors or false positive outliers. 
 
-We report outliers using a simple t-statistic and report the size of the outlier, or its impact on the time series, by subtracting $\hat{y}$, the adjusted time series without outliers removed, from $y$, the original, unadjusted time series.
+We report outliers using a simple t-statistic and report the size of the outlier, or its impact on the time series, by subtracting $\hat{y}$, the adjusted time series with outliers removed, from $y$, the original, unadjusted time series.
 
 ## Data
 
