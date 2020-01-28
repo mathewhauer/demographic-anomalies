@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.8.6)  28 JAN 2020 08:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.8.6)  28 JAN 2020 16:45
 entering extended mode
 **./manuscript.tex
 (manuscript.tex
@@ -528,122 +528,142 @@ Non-PDF special ignored!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ¦ in font cmr12!
-[4] [5] [6pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.1}) has been already used, duplicate ignored
+<./manuscript_files/figure-latex/Figure1.png, id=138, 527.571pt x 312.56775pt>
+File: ./manuscript_files/figure-latex/Figure1.png Graphic file (type png)
+<use ./manuscript_files/figure-latex/Figure1.png>
+Package pdftex.def Info: ./manuscript_files/figure-latex/Figure1.png  used on i
+nput line 244.
+(pdftex.def)             Requested size: 527.56972pt x 312.56697pt.
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.340 C
-       onsistent with more anomalies across the time series, we find more]
-<manuscript_files/figure-latex/AnomalyMap-1.pdf, id=219, 469.755pt x 505.89pt>
-File: manuscript_files/figure-latex/AnomalyMap-1.pdf Graphic file (type pdf)
-<use manuscript_files/figure-latex/AnomalyMap-1.pdf>
-Package pdftex.def Info: manuscript_files/figure-latex/AnomalyMap-1.pdf  used o
-n input line 364.
-(pdftex.def)             Requested size: 469.75386pt x 505.88875pt.
-
-Overfull \hbox (7.48387pt too wide) in paragraph at lines 364--367
+Overfull \hbox (65.29973pt too wide) in paragraph at lines 244--252
  [][] 
  []
 
-[7] [8pdfTeX warning (ext4): destination with the same identifier (name{figure.
+[4] [5pdfTeX warning (ext4): destination with the same identifier (name{figure.
 1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.402 
+l.271 
+       <./manuscript_files/figure-latex/Figure1.png>] [6] [7pdfTeX warning (ext
+4): destination with the same identifier (name{table.1}) has been already used,
+ duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.363 
+      ]
+<manuscript_files/figure-latex/AnomalyMap-1.pdf, id=210, 469.755pt x 505.89pt>
+File: manuscript_files/figure-latex/AnomalyMap-1.pdf Graphic file (type pdf)
+<use manuscript_files/figure-latex/AnomalyMap-1.pdf>
+Package pdftex.def Info: manuscript_files/figure-latex/AnomalyMap-1.pdf  used o
+n input line 388.
+(pdftex.def)             Requested size: 469.75386pt x 505.88875pt.
+
+Overfull \hbox (7.48387pt too wide) in paragraph at lines 388--391
+ [][] 
+ []
+
+[8] [9pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.410 
        <./manuscript_files/figure-latex/AnomalyMap-1.pdf>]
-<manuscript_files/figure-latex/MortalityAnomalies-1.pdf, id=241, 469.755pt x 36
+<manuscript_files/figure-latex/MortalityAnomalies-1.pdf, id=236, 469.755pt x 36
 1.35pt>
 File: manuscript_files/figure-latex/MortalityAnomalies-1.pdf Graphic file (type
  pdf)
 <use manuscript_files/figure-latex/MortalityAnomalies-1.pdf>
 Package pdftex.def Info: manuscript_files/figure-latex/MortalityAnomalies-1.pdf
-  used on input line 421.
+  used on input line 446.
 (pdftex.def)             Requested size: 469.75386pt x 361.34912pt.
 
-Overfull \hbox (7.48387pt too wide) in paragraph at lines 421--436
+Overfull \hbox (7.48387pt too wide) in paragraph at lines 446--461
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 4.55554pt on input line 437.
+LaTeX Warning: Float too large for page by 4.55554pt on input line 462.
 
-[9] [10pdfTeX warning (ext4): destination with the same identifier (name{figure
-.2}) has been already used, duplicate ignored
+[10] [11pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.3}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.456 W
-       e also highlight a level shift (LS) outlier for fertility in <./manuscri
-pt_files/figure-latex/MortalityAnomalies-1.pdf>]
-<manuscript_files/figure-latex/FertilityAnomalies-1.pdf, id=265, 469.755pt x 32
+l.480 
+       <./manuscript_files/figure-latex/MortalityAnomalies-1.pdf>]
+<manuscript_files/figure-latex/FertilityAnomalies-1.pdf, id=259, 469.755pt x 32
 5.215pt>
 File: manuscript_files/figure-latex/FertilityAnomalies-1.pdf Graphic file (type
  pdf)
 <use manuscript_files/figure-latex/FertilityAnomalies-1.pdf>
 Package pdftex.def Info: manuscript_files/figure-latex/FertilityAnomalies-1.pdf
-  used on input line 472.
+  used on input line 500.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (7.48387pt too wide) in paragraph at lines 472--479
+Overfull \hbox (7.48387pt too wide) in paragraph at lines 500--507
  [][] 
  []
 
-[11] [12pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.3}) has been already used, duplicate ignored
+[12] [13pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 
+l.525 
        <./manuscript_files/figure-latex/FertilityAnomalies-1.pdf>]
-<manuscript_files/figure-latex/TrueAnomalies-1.pdf, id=285, 469.755pt x 325.215
+<manuscript_files/figure-latex/TrueAnomalies-1.pdf, id=282, 469.755pt x 325.215
 pt>
 File: manuscript_files/figure-latex/TrueAnomalies-1.pdf Graphic file (type pdf)
 
 <use manuscript_files/figure-latex/TrueAnomalies-1.pdf>
 Package pdftex.def Info: manuscript_files/figure-latex/TrueAnomalies-1.pdf  use
-d on input line 520.
+d on input line 548.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (7.48387pt too wide) in paragraph at lines 520--526
+Overfull \hbox (7.48387pt too wide) in paragraph at lines 548--554
  [][] 
  []
 
-[13] [14pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.4}) has been already used, duplicate ignored
+[14] [15pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.5}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.575 
-       <./manuscript_files/figure-latex/TrueAnomalies-1.pdf>] [15] (manuscript.
-bbl [16] [17]
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no “ in font cmr12!
-[18]
+l.586 
+       <./manuscript_files/figure-latex/TrueAnomalies-1.pdf>] [16] [17] (manusc
+ript.bbl
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 598.
-[19]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 598.
+[18] [19]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+[20])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 626.
+[21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 626.
 (manuscript.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 598.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 598.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 626.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 626.
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 02F68AD4642B89112D32625CCD3B4195;588.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 598.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 626.
  ) 
 Here is how much of TeX's memory you used:
- 8698 strings out of 493305
- 126195 string characters out of 3138872
- 224097 words of memory out of 3000000
- 12031 multiletter control sequences out of 15000+200000
+ 8700 strings out of 493305
+ 126300 string characters out of 3138872
+ 225423 words of memory out of 3000000
+ 12029 multiletter control sequences out of 15000+200000
  12202 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,12n,35p,1113b,486s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,12n,35p,1113b,484s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\mhauer\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
 \tcrm0700.pk> <C:\Users\mhauer\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
 n\ec\dpi600\tcrm1000.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
@@ -657,9 +677,9 @@ type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
 nts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
 ti12.pfb>
-Output written on manuscript.pdf (19 pages, 1376411 bytes).
+Output written on manuscript.pdf (21 pages, 1393110 bytes).
 PDF statistics:
- 404 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 405 PDF objects out of 1000 (max. 8388607)
+ 86 named destinations out of 1000 (max. 500000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

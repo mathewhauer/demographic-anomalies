@@ -94,21 +94,21 @@ Anomalies in Big Data}
 The proliferation of big data, wider access to advanced computing
 platforms, and the development of powerful statistical algorithms can
 uncover hidden anomalies in demographic data that have previously been
-dismissed as noise. Here, we demonstrate how demographers can use causal
-inference techniques and abductive reasoning to identify fertility and
-mortality anamolies in state-level data trends by investigating
-demographic time series data since 1999. In demonstrating our technique,
-we uncover real spikes and dips in fertility and mortality over time,
-distinguished from regular trend variations. We show that 36 states
-exhibited at least one mortality anomaly over time, totalling nearly
-300,000 additional deaths, while an additional seven states exhibited
-periods of decline resuling in 250,000 fewer deaths. Ten states
-exhibited real, marked periods of declines in fertility, totalling more
-than 214,000 fewer births than expected, and 8 states had periods of
-excess births, resulting in an addition 12,000 births. Our results show
-how researchers can detect demographic anomalies in trend data and use
-those anomalies as a beginning point for further investigation into the
-causes.
+dismissed as noise. Here, we demonstrate how social scientists can use
+causal inference techniques and abductive reasoning to identify
+fertility and mortality anamolies in state-level data trends by
+investigating demographic time series data since 1999. In demonstrating
+our technique, we uncover real spikes and dips in fertility and
+mortality over time, distinguished from regular trend variations. We
+show that 36 states exhibited at least one mortality anomaly over time,
+totalling nearly 300,000 additional deaths, while an additional seven
+states exhibited periods of decline resuling in 250,000 fewer deaths.
+Ten states exhibited real, marked periods of declines in fertility,
+totalling more than 214,000 fewer births than expected, and 8 states had
+periods of excess births, resulting in an addition 12,000 births. Our
+results show how researchers can detect demographic anomalies in trend
+data and use those anomalies as a beginning point for further
+investigation into the causes.
 \end{abstract}
 
 \noindent%
@@ -139,27 +139,15 @@ these advances reveals important insights into society
 monitor population trends \citep{nobles2019, torche2015hidden}.
 
 Causal inference, in its most common usage, is an attempt to uncover the
-underlying mechanism that results in changes in a phenomenon and have a
-long history approaches in social sciences \citep{grimmer2015ppsp}.
-Often, the identification of a casual mechanism requires either a
-randomized control trial (RCT) or expert knowledge applied to a natural
-experiment. For population-level analysis, expensive RCTs usually
-preclude their widespread adoption \citep{west2008ajph}. Using natural
-experiments provide less certainty about causation and fewer
-opportunities to replicate work but they provide important and
-widespread insights such as the determinants of migration, however,
-provides important and more widespread insights on the determinants of
-migration after Hurricane Katrina in 2006
-\citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
-mini baby booms after electrical blackouts \citep{fetzer2018jpe}, and
-the highly publicized estimates of excess mortality after Hurricane
-Maria in Puerto Rico in 2016
-\citep{kishore2018mortality, santos2018use}. Both RCTs and natural
-experiments follow traditional, hypothesis testing, inductive scientific
-paradigms where a question is first posed and scientists generate or
-find data to answer the question. Such approaches, while extensively
-utilized and time-tested, are likely to miss important phenomena that
-might go unnoticed.
+underlying mechanisms that result in changes in a phenomenon and has a
+long history as an approach to inquiry in the social sciences
+\citep{grimmer2015ppsp}. Often, the identification of a casual mechanism
+requires either a randomized control trial (RCT) or expert knowledge
+applied to a natural experiment. For population-level analysis,
+expensive RCTs usually preclude their widespread adoption
+\citep{west2008ajph}. Using natural experiments provide less certainty
+about causation and fewer opportunities to replicate work but they
+provide important and widespread insights.
 
 Both RCTs and natural experiments follow traditional hypothesis
 testing--inductive scientific paradigms where a question is first posed
@@ -191,18 +179,20 @@ without causes has led to new theories of galactic migration of planets
 and other breakthroughs \citep{gomes2005n}.
 
 In this paper, we use modern statistical outlier detection algorithms
-\citep{chen1993joint} on nearly twenty years of mortality and fertility
-data at the US state-level to identify anomalous demographic behavior.
-In essence, we identify \emph{effects without knowledge of the cause}.
-We ask two questions regarding demographic anomalies: What are the
-hidden baby booms/busts and mortality spikes/dips in the United States
-over the last twenty years? We do not necessarily know the causes of
-these anomalies but identifying them allows scientists with more
-detailed knowledge of local population dynamics, state-level policy
-making, or macro-economics to explain these phenomena post-hoc. From
-explanations of phenomena that may have previously gone unnoticed,
-demographers may be able to better forecast populations and provide
-policy solutions for impending problems.
+\citep{chen1993joint} as a means to illustrate one way that social
+scientists can engage in discovery using big data techniques on nearly
+twenty years of mortality and fertility data at the US state-level to
+identify anomalous demographic behavior. In essence, we identify
+\emph{effects without knowledge of the cause}. We ask two questions
+regarding demographic anomalies: What are the hidden baby booms/busts
+and mortality spikes/dips in the United States over the last twenty
+years? We do not necessarily know the causes of these anomalies but
+identifying them allows scientists with more detailed knowledge of local
+population dynamics, state-level policy making, or macro-economics to
+explain these phenomena post-hoc. From explanations of phenomena that
+may have previously gone unnoticed, social scientists may be able to
+better forecast populations and provide policy solutions for impending
+problems such as climate change.
 
 \hypertarget{materials-and-methods}{%
 \section{Materials and Methods}\label{materials-and-methods}}
@@ -249,14 +239,27 @@ An outlier is detected using a regression equation
 
 \[ \pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \alpha_t \]
 
+\begin{figure}
+\centering
+\includegraphics{./manuscript_files/figure-latex/Figure1.png}
+\caption{\textbf{``Toy'' example of anomaly detection using the exchange
+rate between the Euro and the Swiss Franc.} The Swiss Franc was pegged
+to the Euro at 1.2 until January 15 2015 when the peg was removed and
+the currency was allowed to trade more freely. This is a very strong
+anomly in the time series (\emph{t}-stat = -144.07) detectable using
+statistical methods and visually. The countefactural estimate with the
+outlier removed would simply have kept the currency exchange at 1.2
+(\(\hat{y}\)). \label{explanationfigure}}
+\end{figure}
+
 where \(\pi(B)=\sum_{i=o}^{inf} \pi_iB^i\). The identification of
-outliers then involves a three step process to (1) identify all
-potential outliers, \(t_j\) and \(L_j (B)\), (2) joint estimates of
-model parameters and outlier effects are computed to identify
-potentially spurious outliers, and (3) the outliers and effects are
-re-estimated without spurious outliers. Of importance here is step 2,
-which relies on some critical value above which an outlier at time point
-m is considered spurious. Based on Chen and Liu's
+outliers then involves a three step process. First, (1) the algorithm
+identifies all potential outliers, \(t_j\) and \(L_j (B)\). Next, (2) we
+compute joint estimates of model parameters and outlier effects to
+identify potentially spurious outliers. Finally, (3) the outliers and
+effects are re-estimated without spurious outliers. Of importance here
+is step 2, which relies on some critical value above which an outlier at
+time point \(m\) is considered spurious. Based on Chen and Liu's
 \citeyearpar{chen1993joint} recommendation, we set a critical value of
 3.5 which generally minimizes the possibility of Type I errors or false
 positive outliers.
@@ -265,6 +268,27 @@ We report outliers using a simple t-statistic and report the size of the
 outlier, or its impact on the time series, by subtracting \(\hat{y}\),
 the adjusted time series with outliers removed, from \(y\), the
 original, unadjusted time series.
+
+\textbf{\autoref{explanationfigure}} shows a toy example for anomaly
+detection in a time series using the classic example of the exchange
+rate between the Euro and the Swiss Franc (CHF). On January 15 2015, the
+Swiss National Bank removed the currency peg of 1.20 francs per Euro,
+exposing the Franc to the volatility of the currency market. The Franc
+immediately began trading a reduced rate compared to the Euro. What
+would have been the Euro/CHF exchange rate had the Swiss National Bank
+\emph{not} removed the peg? A simple counter-factual estimate would be
+to keep the exchange rate at 1.20 (\(\hat{y}\), sometimes called a
+``synthetic control'' \citep{abadie2010synthetic}).
+
+In the Swiss Franc example, we have knowledge of the Swiss Bank's
+activities after the fact or ex-post-facto to to create the
+counter-factual time series \(\hat{y}\) of 1.20. But is this anomaly
+detectable without knowledge of the Swiss Bank's activities? In other
+words, can we detect the reduction of the exchange rate on January 15
+using only the time series? Absolutely. the tsoutliers package
+identifies January 15 2015 as an extremely strong level-shift outlier
+(\emph{t}-stat = -144.07). The real world is hardly this simplified
+where a direct intervention is known and is testable.
 
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
@@ -298,7 +322,7 @@ bely explanation.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-2}\textbf{Summary by Demographic Component.}  refers to the number of anomolies for each type and demographic component, States refers to the number of unique states exhibiting that specific Type-demographic component. \label{sumtable}}
+\caption{\label{tab:unnamed-chunk-3}\textbf{Summary by Demographic Component.}  Here we can see there 22 Fertility and 156 Mortality anomalies among the state-level time series, totalling more than 200k anomalous births and 600k anomalous deaths. \label{sumtable}}
 \centering
 \begin{tabular}[t]{lrllrrr}
 \toprule
@@ -310,7 +334,7 @@ Mortality & 156 & 43.57M & 43.52M & 48,535 & 627,364 & 1.440\\
 \end{tabular}
 \end{table}
 
-\textbf{\autoref{sumtable}} report the overall number of anomalies we
+\textbf{\autoref{sumtable}} reports the overall number of anomalies we
 detect of each type for births and deaths and some summary statistics
 across all anomaly types and \textbf{\autoref{fig:summap}} maps these
 results. We find considerably more mortality anomalies (n = 156) than
@@ -332,7 +356,7 @@ fertility-inducing event and behavior change is less strong than the
 relationship between a mortality-inducing event (such as a terrorist
 incident) and death \citep{Rodgers2005OKBombing}. Of course, not all
 events that impact fertility and mortality are catastrophic. Researchers
-have documented that more commonplace events such as massive layoff
+have documented that more commonplace events such as massive layoffs
 \citep{Venkataramani2019} or policy changes
 \citep{Livingston2017Cannabis} can also create anomalies in mortality
 patterns, but we have not found such evidence for fertility.
@@ -345,7 +369,7 @@ research findings that link high severity weather events to
 significantly lower fertility \citep{Evans2008Hurricanebirth}.
 Conversely, mortality anomalies tend to be more evenly split between
 positive and negative anomalies, but tend toward more deaths rather than
-less deaths. Again, this is not surprising, as the kinds of events that
+fewer deaths. Again, this is not surprising, as the kinds of events that
 increase death (e.g., plant closings are associated with increased
 opioid death \citep{Venkataramani2019}) are more common than the events
 that decrease death (e.g., cannabis legalization is associated with
@@ -370,9 +394,9 @@ We observe much fewer fertility anomalies than mortality anomalies.
 \hypertarget{mortality}{%
 \subsection{Mortality}\label{mortality}}
 
-Since the purpose of our paper is to demonstrate how demographers can
-make use of causal inference technique, we will not discuss all of our
-findings here, in this paper. Instead, we will use a few cases for
+Since the purpose of our paper is to demonstrate how social scientists
+can make use of causal inference technique, we will not discuss all of
+our findings in this paper. Instead, we will use a few cases for
 illustration. For mortality, we will use New York State as an example
 (\textbf{\autoref{fig:mortnewhamp}a}). We identify seven anomalies in
 the mortality time series for New York, all with \emph{t}-statistics in
@@ -380,7 +404,8 @@ excess of 3.91, making these anomalies unlikely to be due to chance. The
 algorithm correctly identifies September 2001 as an additive outlier
 (2001:09 \emph{t}= 6.396) where there were 1,628 more deaths in that
 month than anticipated. This mortality event is likely caused by the
-September 11 tragedy and the detection of this mortality event provides
+September 11 terrorist attack on the World Trade Center that immediately
+killed 2,606 people and the detection of this mortality event provides
 confidence in our detection of other anomalies.
 
 In \textbf{\autoref{fig:mortnewhamp}a}, notice the strong level shift
@@ -391,14 +416,14 @@ single largest mortality protective anomaly among all states. This
 translates to 6.90\% fewer deaths than expected over the time period.
 What is driving this mortality protection? What policies did NY put into
 place that might have contributed to this considerable mortality
-reduction? What environmental conditions may have changed? These are the
-kinds of questions that arise from our analyses. The purpose of our
-paper is not to answer these questions, but our findings underscore the
-need for more research that takes an abductive approach. By identifying
-anomalies through an inductive process, researchers can then look for
-underlying causes. Once those causes are identified, researchers can
-then use a deductive process to see if such events predict other (or
-future) anomalies.
+reduction? What environmental or economic conditions may have changed
+may have changed? These are the kinds of questions that arise from our
+analyses. The purpose of our paper is not to answer these questions, but
+our findings underscore the need for more research that takes an
+abductive approach. By identifying anomalies through an inductive
+process, researchers can then look for underlying causes. Once those
+causes are identified, researchers can then use a deductive process to
+see if such events predict other (or future) anomalies.
 
 To see the potential for combining abductive reasoning with causal
 inference, contrast the mortality protection in New York with the
@@ -445,7 +470,7 @@ with a clear temporary change (TC) outlier for fertility in Louisiana
 back-to-back in 2005 (2005:08 \emph{t} = -6.002; and 2005:10 \emph{t} =
 -4.997), coinciding with the destruction of Hurricane Katrina from the
 same year. The migration associated with Hurricane Katrina has garnered
-most of the attention of demographers
+most of the attention of social scientists
 \citep{fussellRecoveryMigrationCity2014, horiDisplacementDynamicsSouthern2009},
 but the hurricane had a very clear impact on fertility behaviors too,
 creating a mini ``baby bust'' in Louisiana with the departure of many
@@ -458,14 +483,17 @@ Connecticut. Here we detect a strong (\emph{t}= -3.71 for -285
 births/month) level shift toward lower fertility beginning in August
 2009 (2009:08) that continues through the end of the period
 (\textbf{\autoref{fig:fertla}b}). This LS toward lower fertility reduced
-the \# of births by -28,752 or 8.57\%) lower than the counterfactual
+the number of births by 28,752 or 8.57\%) lower than the counterfactual
 time series. The stock market crash of 2008, where the Dow Jones
 Industrial Average had the largest single-day loss up to that point,
 occurred just 11 months before we detect a shift toward lower fertility.
 It is possible that the trend toward lower fertility in August 2009 and
 the stock market crash in September 2008 are linked, although, as stated
 previously, we are speculating only to illustrate how causal inference
-could work in an abductive research agenda.
+could work in an abductive research agenda. A potentially interesting
+future line of research would be to link fertility anomalies to the
+kinds of economic shocks that may lead to outmigration of those in their
+childbearing years.
 
 \begin{figure}
 \centering
@@ -491,13 +519,13 @@ tragedy and the rise in New Hampshire's mortality starting in 2010 could
 be linked to the opioid epidemic. Similarly, Louisiana's TC anomalies
 seem linked to Hurricanes Katrina and Rita while the LS anomaly in
 Connecticut's fertility appears linked to the Great Recession. However,
-we detect numerous seemingly unexplainable demographic anomalies in
-other states. \textbf{\autoref{fig:ferthawaii}} shows two such
-unexplained anomalies.
+we detect numerous other demographic anomalies in other states, on the
+causes of which we will not speculate. \textbf{\autoref{fig:ferthawaii}}
+shows two such unexplained anomalies.
 
 In \textbf{\autoref{fig:ferthawaii}a} we identify a single additive
 anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with
-a \emph{t}-statistic of 4.96, -14.9\% above the counter-factual time
+a \emph{t}-statistic of 4.96, 14.9\% above the counter-factual time
 series. This single, anomalous month is also the second highest monthly
 births in the time series. We have no plausible explanation for this
 anomaly. We do not believe this is simply a data error as the other
