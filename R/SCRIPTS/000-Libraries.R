@@ -64,7 +64,8 @@ pkgs <- c(
   "bsts",
   "lubridate",
   "tsoutliers",
-  "numform"
+  "numform",
+  "statebins"
 )
 
 # Install missing packages
