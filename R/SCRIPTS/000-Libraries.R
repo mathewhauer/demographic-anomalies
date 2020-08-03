@@ -65,7 +65,9 @@ pkgs <- c(
   "lubridate",
   "tsoutliers",
   "numform",
-  "statebins"
+  "statebins",
+  "flipTime",
+  "gridGraphics"
 )
 
 # Install missing packages

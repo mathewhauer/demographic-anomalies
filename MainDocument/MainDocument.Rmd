@@ -23,8 +23,10 @@ keywords:
 
 abstract: "The proliferation of big data, wider access to advanced computing platforms, and the development of powerful statistical algorithms can uncover hidden anomalies in social data, previously dismissed as noise. Here, we combine causal inference techniques and abductive reasoning to identify fertility and mortality anomalies on twenty years of demographic data in the United States. We uncover real, “hidden” baby booms/busts and mortality spikes/dips, distinguishable from regular trend variations.  We identify more than 22 and 156 fertility and mortality anomalies, totaling more than 200k and 600k anomalous births and deaths, respectively. Notable detectable mortality anomalies include the September 11 2001 terrorist attack in New York, the emergence and acceleration of the opioid epidemic in New Hampshire, and the excess mortality due to Hurricane Maria in Puerto Rico. Notable fertility anomalies include the “missing births” in Louisiana after Hurricane Katrina and the reduction in fertility behavior after the September 2008 stock market crash in Connecticut, amongst others. Our combined causal inference and abductive reasoning approach can be readily adapted to find other, undiscovered social phenomena or to evaluate the efficacy of important public policies."
   
-bibliography: mybibfile
+bibliography: ../MainDocument/mybibfile.bib
+
 output: rticles::asa_article
+
 header-includes:
 - \usepackage{booktabs}
 - \usepackage{longtable}
@@ -111,9 +113,9 @@ sum(abstractsums$ydiff[which(abstractsums$component == "Fertility" & abstractsum
 
 # Introduction
 
-The search for causality is one of the primary motiviations behind social science [@smith2011commentary; @pearl2009causal]. Causal Inference, the identification of causal mechanisms, attempts to uncover the underlying mechanisms that result in changes in a phenomenon and has a long history as an approach to inquiry in the social sciences [@grimmer2015ppsp]. Often, the identification of a casual mechanism is accomplished via a randomized control trial (RCT) or expert knowledge applied to a natural experiment [@salganik2019bit]. 
+The search for causality is one of the primary motivations behind social science [@smith2011commentary; @pearl2009causal]. Causal Inference, the identification of causal mechanisms, attempts to uncover the underlying mechanisms that result in changes in a phenomenon and has a long history as an approach to inquiry in the social sciences [@grimmer2015ppsp]. Often, the identification of a casual mechanism is accomplished via a randomized control trial (RCT) or expert knowledge applied to a natural experiment [@salganik2019bit]. 
 
-Unfortunately, both RCTs and natural experiments have drawbacks. RCTs are often prehibitively expensive for many scientists, precluding their widespread adoption in the social sciences [@west2008ajph]. RCTs are also sometimes impossible to deploy in the "real world". For instance, an RCT to study country-level austeriy measures would be difficult, if not impossible, to implement. Natural experiments are a cheaper alternative, but provide less certainty about causation, fewer opportunities to replicate work, and require expert knowledge of the natural experiment to be properly employed [@pearl2018book].
+Unfortunately, both RCTs and natural experiments have drawbacks. RCTs are often prohibitively expensive for many scientists, precluding their widespread adoption in the social sciences [@west2008ajph]. RCTs are also sometimes impossible to deploy in the "real world". For instance, an RCT to study country-level austerity measures would be difficult, if not impossible, to implement. Natural experiments are a cheaper alternative, but provide less certainty about causation, fewer opportunities to replicate work, and require expert knowledge of the natural experiment to be properly employed [@pearl2018book].
 
 <!-- In its most basic application, causal inference approaches accomplish this with two populations, a control group ($Y(0)$) and a treatment group ($Y(1)$) and simply subtracting the results of the control from the treatment ($effect = Y(1) - Y(0))$).  -->
 
@@ -128,37 +130,95 @@ In a data-rich environment, abductive reasoning can be more easily applied to fi
 
 <!-- Abductive modeling is the movement from the inductive to the deductive, and sometimes back and forth, to reach conclusions [@bryant2014realm] or “inferring cause from effect” [@Crowder2017]. In situations with large data sets, an abductive approach is far superior to deductive hypothesis testing, as p-values with an extremely large number of cases are far from revealing [@head2015extent;@nuzzo2014scientific] and we do not want to make purely inductive inferences from data of questionable generalizability [@ruggles2014big]. Owing to the long history of big data sets in demographic research (one of the original "big data" resources [@ruggles2014big]),  -->
 
-In this paper, we combine a modern statistical outlier detection algorithm [@chen1993joint], abductive reasoning, and large demographic data sets on more than 20 years of mortality/fertility to identify anomalous demographic behavior. In essence, we identify *effects without knowledge of the cause*. We ask one fundamanetal question regarding demographic anomalies: What are the hidden baby booms/busts and mortality spikes/dips in the United States over the last twenty years? We do not necessarily know the causes of these anomalies but identifying them allows scientists with more detailed knowledge of local population dynamics, state-level policy making, or macro-economics to explain these phenomena post-hoc. From explanations of phenomena that may have previously gone unnoticed, social scientists may be able to better forecast populations and provide policy solutions for impending problems such as climate change.
+In this paper, we combine a modern statistical outlier detection algorithm [@chen1993joint], abductive reasoning, and large demographic data sets on more than 20 years of mortality/fertility to identify anomalous demographic behavior. In essence, we identify *effects without knowledge of the cause*. We ask one fundamental question regarding demographic anomalies: What are the hidden baby booms/busts and mortality spikes/dips in the United States over the last twenty years? We do not necessarily know the causes of these anomalies but identifying them allows scientists with more detailed knowledge of local population dynamics, state-level policy making, or macro-economics to explain these phenomena post-hoc. From explanations of phenomena that may have previously gone unnoticed, social scientists may be able to better forecast populations and provide policy solutions for impending problems such as climate change.
 
 # Materials and Methods
 
 ## Method
-We use a statistical time series outlier detection algorithm [@chen1993joint], implemented in the R programming language [@rcore] via the tsoutliers package [@tsoutliers2019]. This algorithm iteratively uses ARIMA models to 1) produce a counter-factual time series to initially detect an outlier or anomaly, and 2) refit the ARIMA with the outliers removed. Here we briefly summarize and describe the method.
+We use a statistical time series outlier detection algorithm [@chen1993joint], implemented in the R programming language [@rcore] via the tsoutliers package [@tsoutliers2019]. This algorithm iteratively uses ARIMA models to 1) identify potential outliers or anomalies and 2) refit the ARIMA with the outliers removed to produce a counter-factual time series. Here we briefly summarize and describe the method.
 
-Often, the behavior of a time series can be described and summarized in ARIMA models. If a series of values, $y_t^*$, is subject to $m$ interventions or outliers at time points $t_1,t_2,…,t_m$, then $y_t^*$ can be defined as
+Often, the behavior of a time series can be described and summarized in ARIMA models. If a series of values, $y_t^*$, is subject to $m$ interventions or outliers at time points $t_1,t_2,…,t_m$ with weights $\omega$ then $y_t^*$ can be defined as
 
-$$y_t^* = \sum_{j=1}^{m} \omega_jL_j(B)I_t(t_j) + \frac{\theta(B)}{\phi(B)\alpha(B)}\alpha_t$$
+\begin{equation}
+\label{eq:arima}
+y_t^* = \sum_{j=1}^{m} \omega_jL_j(B)I_t(t_j) + \frac{\theta(B)}{\phi(B)\alpha(B)}\alpha_t 
+\end{equation}
 
 Where
-$I_t(t_j)$ is an indicator variable with a value of 1 at observation $t_j$ and where the $j$th outlier arises,
-$\phi(B)$ is an autoregressive polynomial with all roots outside the unit circle,
-$\theta(B)$ is a moving average polynomial with all roots outside the unit circle,
+$I_t(t_j)$ is an indicator variable with a value of 1 at observation $t_j$ and where the $j$th outlier arises,  
+$\phi(B)$ is an autoregressive polynomial with all roots outside the unit circle,  
+$\theta(B)$ is a moving average polynomial with all roots outside the unit circle,  
 and $\alpha(B)$ is an autoregressive polynomial with all roots on the unit circle.
 
-We examine three types of outliers at time point $t_m$:
-1) additive outliers (AO), defined as $L_j(B)=1$;
-2) level shift outliers (LS), defined as $L_j(B) = 1/(1-B)$; and
-2) temporary change outliers (TC), defined as $L_j(B) = 1/(1-\delta B)$.
+We examine three types of outliers at time point $t_m$:  
+1. additive outliers (AO), defined as $L_j(B)=1$;  
+2. level shift outliers (LS), defined as $L_j(B) = 1/(1-B)$; and  
+3. temporary change outliers (TC), defined as $L_j(B) = 1/(1-\delta B)$ where $\delta$ is equal to 0.7.
 
 Colloquially, additive outliers arise when a single event causes the time series to unexpectedly increase/decrease for a single time period; level shift outliers arise when an event causes the time series to unexpectedly increase/decrease for multiple time periods; and temporary change outliers arise when an event causes the time series to unexpectedly increase/decrease with lingering effects that decay over multiple time periods.
 
-An outlier is detected using a regression equation
+An outlier is detected with the estimated residuals using a regression equation
 
-$$ \pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \alpha_t $$
+\begin{equation}
+\label{eq:residuals}
+\pi(B)y_t^* \equiv \hat{e} = \sum_{j=1}^m \omega_j \pi(B)L_j(B)I_t(t_j) + \alpha_t
+\end{equation}
+where $\pi(B)=\sum_{i=o}^{inf} \pi_iB^i$.
 
-![**"Toy" example of anomaly detection using the exchange rate between the Euro and the Swiss Franc.** The Swiss Franc was pegged to the Euro at 1.2 until January 15 2015 when the peg was removed and the currency was allowed to trade more freely. This is a very strong anomly in the time series (*t*-stat = -144.07) detectable using statistical methods and visually. The countefactural estimate with the outlier removed would simply have kept the currency exchange at 1.2 ($\hat{y}$). \label{explanationfigure}](./manuscript_files/figure-latex/Figure1.png)
+Equations \ref{eq:arima} and \ref{eq:residuals} allow for an automatic detection of anomalies iterated over a two-stage process. 
 
-where $\pi(B)=\sum_{i=o}^{inf} \pi_iB^i$. The identification of outliers then involves a three step process. First, (1) the algorithm identifies all potential outliers, $t_j$ and $L_j (B)$. Next, (2) we compute joint estimates of model parameters and outlier effects to identify potentially spurious outliers. Finally, (3) the outliers and effects are re-estimated without spurious outliers. Of importance here is step 2, which relies on some critical value above which an outlier at time point $m$ is considered spurious. Based on Chen and Liu’s [-@chen1993joint] recommendation, we set a critical value of 3.5 which generally minimizes the possibility of Type I errors or false positive outliers. 
+In stage 1, anomalies are located. First, an ARIMA model is fit to the time series using the `forecast` package in R [@Rforecast;@hymdman2008] where the best performing ARIMA model is selected based on the Bayesian information criterion (BIC). Next, the residuals from the forecast are checked for their significance using equation \ref{eq:residuals} where only anomalies above a critical *t*-static are considered "true" anomalies ($|\tau| \geq 3.5$). We choose this critical value based on Chen and Liu's [-@chen1993joint] recommendation to minimize Type I or false-positive anomalies. Finally, two additional rules are implemented: If multiple anomalies are detected at the same time point, only the most significant anomaly is selected and if anomalies of the same type at consecutive time periods are detected, only the anomaly with highest *t*-statistic is selected.
+
+In stage 2, anomalies are removed from the time series and a new ARIMA model is chosen and fit. The selection of the initial ARIMA model could have been affected by the presence of the anomalies, making some anomalies spuriously identified. To correct for this, a new ARIMA model is fit accounting for additional regression effects in equation \ref{eq:arima} from the list of candidate anomalies identified in stage 1, effectively removing the anomalies from the time series. Each anomaly is then reassessed under the new model and those anomalies that are no longer significant are removed.
+
+These two stages are then iterated until no additional anomalies are detected.
+
+## Robustness Check
+To determine the false-positive (Type I) and false-negative (Type II) error rates under a critical value of 3.5, we ran two simulations. For the false-positive error we simulated 1000 time series with 180 time steps without introducing any anomalies and ran the `tsoutliers` algorithm on them. Any anomalies we detect in these time series are spurious anomalies. For the false-negative error, we simulated 1000 time series with 180 time steps but introduced a single anomaly of the same magnitude at the same time point in each time series. If the `tsoutliers` algorithm fails to detect the anomaly, it would be considered a false-negative error.
+
+
+```{r , include = FALSE, cache = TRUE}
+
+set.seed(1)
+results_noutliers <- data.frame()
+# y2 <- matrix(nrow = 1000, ncol=180)
+for(i in 1:1000){
+  tryCatch({
+y <- arima.sim(model = list(ar = 0.7, ma = -0.4), n = 180)
+
+
+df2<- tso(y, cval = 3.5)$outliers
+df2$iteration <- i
+results_noutliers <- bind_rows(results_noutliers, df2)
+# print(i)
+  } , error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+
+# (a <- nrow(results_noutliers) / (180*1000))
+# 
+# a * 20000
+
+
+results_AO <- data.frame()
+# y2 <- matrix(nrow = 1000, ncol=180)
+for(i in 1:1000){
+  tryCatch({
+    y <- arima.sim(model = list(ar = 0.7, ma = -0.4), n = 180)
+    y[150] <- 4
+    
+    df2<- tso(y, cval = 3.5)$outliers
+    df2$iteration <- i
+    results_AO <- bind_rows(results_AO, df2)
+    # print(i)
+  } , error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+```
+In our anomaly-less time series, we detect `r nrow(results_noutliers)` anomalies on the 180,000 candidate time steps for a false-positive error rate of `r prettyNum(nrow(results_noutliers) / 180000*100, digits = 3)`%. In our time series containing a single anomaly, we detect `r nrow(results_AO[which(results_AO$time == 150),])` anomalies out of the 1000 candidate time series, for a false-negative error rate of `r (1-(nrow(results_AO[which(results_AO$time == 150),]) / 1000)) * 100`%. This provides a statistical power of `r nrow(results_AO[which(results_AO$time == 150),]) / 1000`. These results give us confidence that the anomalies we detect in this paper are true anomalies.
+
+
+![**"Toy" example of anomaly detection using the exchange rate between the Euro and the Swiss Franc.** The Swiss Franc was pegged to the Euro at 1.2 until January 15 2015 when the peg was removed and the currency was allowed to trade more freely. This is a very strong anomly in the time series (*t*-stat = -144.07) detectable using statistical methods and visually. The countefactural estimate with the outlier removed would simply have kept the currency exchange at 1.2 ($\hat{y}$). \label{explanationfigure}](../MainDocument/MainDocument_files/figure-latex/Figure1.png)
+
+ <!-- The identification of outliers then involves a three step process. First, (1) the algorithm identifies all potential outliers, $t_j$ and $L_j (B)$. Next, (2) we compute joint estimates of model parameters and outlier effects to identify potentially spurious outliers. Finally, (3) the outliers and effects are re-estimated without spurious outliers. Of importance here is step 2, which relies on some critical value above which an outlier at time point $m$ is considered spurious. Based on Chen and Liu’s [-@chen1993joint] recommendation, we set a critical value of 3.5 which generally minimizes the possibility of Type I errors or false positive outliers.  -->
 
 ```{r, include = FALSE }
 set.seed(1)
@@ -201,8 +261,9 @@ dat3 <- ts(stockdat$Value)
 stockdat_outlier <- tsoutliers::tso(dat3,types = c("AO","LS","TC"),cval = sigma, maxit.iloop=10)
 ```
 
-We report outliers using a simple t-statistic and report the size of the outlier, or its impact on the time series, by subtracting $\hat{y}$, the adjusted time series with outliers removed, from $y$, the original, unadjusted time series.
+<!-- We report outliers using a simple t-statistic and report the size of the outlier, or its impact on the time series, by subtracting $\hat{y}$, the adjusted time series with outliers removed, from $y$, the original, unadjusted time series. -->
 
+## Toy example
 **\autoref{explanationfigure}** shows a toy example for anomaly detection in a time series using the classic example of the exchange rate between the Euro and the Swiss Franc (CHF). On January 15 2015, the Swiss National Bank removed the currency peg of 1.20 francs per Euro, exposing the Franc to the volatility of the currency market. The Franc immediately began trading a reduced rate compared to the Euro. What would have been the Euro/CHF exchange rate had the Swiss National Bank *not* removed the peg? A simple counter-factual estimate would be to keep the exchange rate at 1.20 ($\hat{y}$, sometimes called a "synthetic control" [@abadie2010synthetic]). 
 
 In the Swiss Franc example, we have knowledge of the Swiss Bank's activities after the fact or ex-post-facto to to create the counter-factual time series $\hat{y}$ of 1.20. But is this anomaly detectable without knowledge of the Swiss Bank's activities? In other words, can we detect the reduction of the exchange rate on January 15 using only the time series? Absolutely. the tsoutliers package identifies January 15 2015 as an extremely strong level-shift outlier (*t*-stat = `r round( stockdat_outlier$outliers$tstat[1], digits = 2)`). The real world is hardly this simplified where a direct intervention is known and is testable.
@@ -213,7 +274,7 @@ We search for demographic anomalies using the Center for Disease Control and Pre
 [@CDC_fert07;@CDC_mort]. These data sets contain every birth and death record in the United States over the time periods of interest, representing the universe of both mortality and fertility data in the US.  These data are considered the “gold standard” of data collections [@mahapatra2007civil] and have been considered “complete” since 1968 [@hetzel2016us]. We search over each state equivalent’s (n=51) mortality (n=228) and fertility (n=180) monthly time series for a total of 20,808 state-months of data.
 
 # Results
-We detect numerous anomalous mortality and fertility events at the US state-level since 1999. A full listing of these anomalies can be found in the **Supplementary Materials**. We begin by highlighting significant fertility and mortality anomaloies across all three types of outliers (Additive Outliers, Level Shift Outliers, and Temporary Change outliers) with plausible explanations. We then highlight two strong anomalies that bely explanation. Finally, we conclude with a summary of the anomalies we detect.
+We detect numerous anomalous mortality and fertility events at the US state-level since 1999. A full listing of these anomalies can be found in the **Supplementary Materials**. We begin by highlighting significant fertility and mortality anomalies across all three types of outliers (Additive Outliers, Level Shift Outliers, and Temporary Change outliers) with plausible explanations. We then highlight two strong anomalies that bely explanation. Finally, we conclude with a summary of the anomalies we detect.
 
 ## Fertility
 
@@ -228,9 +289,9 @@ conn_tot <- prettyNum(abs(sum(outlier.fert.conn$y - outlier.fert.conn$yadj)), di
 conn_per <- percent(abs(sum(outlier.fert.conn$y - outlier.fert.conn$yadj) / sum(outlier.fert.conn$yadj[80:180])))
 ```
 
-We begin with a clear temporary change (TC) outlier for fertility in Louisiana (**\autoref{fig:fertla}a**). Here we detect two TC outliers, nearly back-to-back in 2005 (2005:08 *t* = `r la_tstat1`; and 2005:10 *t* = `r la_tstat2`), coinciding with the destruction of Hurricane Katrina from the same year. The migration associated with Hurricane Katrina has garnered most of the attention of social scientists [@fussellRecoveryMigrationCity2014;@horiDisplacementDynamicsSouthern2009], but the hurricane had a very clear impact on fertility behaviors too, creating a mini "baby bust" in Louisiana with the departure of many people in their childbearing years. We estimate `r la_averbirths` fewer births in Louisiana compared to the counterfactual, likely attributable to the Hurricane.
+We begin with a clear temporary change (TC) outlier for fertility in Louisiana (**\autoref{fig:fertla}a**). Here we detect two TC outliers, nearly back-to-back in 2005 (2005:08 *t* = `r la_tstat1`; and 2005:10 *t* = `r la_tstat2`), coinciding with the destruction of Hurricane Katrina from the same year. The migration associated with Hurricane Katrina has garnered most of the attention of social scientists [@fussellRecoveryMigrationCity2014;@horiDisplacementDynamicsSouthern2009], but the hurricane had a very clear impact on fertility behaviors too, creating a mini "baby bust" in Louisiana with the departure of many people in their childbearing years. We estimate `r la_averbirths` fewer births in Louisiana compared to the counter-factual, likely attributable to the Hurricane.
 
-We also highlight a level shift (LS) outlier for fertility in Connecticut. Here we detect a strong (*t*= `r conn_tstat` for `r conn_births` births/month) level shift toward lower fertility beginning in August 2009 (2009:08) that continues through the end of the period (**\autoref{fig:fertla}b**). This LS toward lower fertility reduced the number of births by `r conn_tot` or `r conn_per`) lower than the counterfactual time series. The stock market crash of 2008, where the Dow Jones Industrial Average had the largest single-day loss up to that point, occurred just 11 months before we detect a shift toward lower fertility. It is possible that the trend toward lower fertility in August 2009 and the stock market crash in September 2008 are linked, although, as stated previously, we are speculating only to illustrate how causal inference could work in an abductive research agenda. A potentially interesting future line of research would be to link fertility anomalies to the kinds of economic shocks that may lead to outmigration of those in their childbearing years.  
+We also highlight a level shift (LS) outlier for fertility in Connecticut. Here we detect a strong (*t*= `r conn_tstat` for `r conn_births` births/month) level shift toward lower fertility beginning in August 2009 (2009:08) that continues through the end of the period (**\autoref{fig:fertla}b**). This LS toward lower fertility reduced the number of births by `r conn_tot` or `r conn_per`) lower than the counter-factual time series. The stock market crash of 2008, where the Dow Jones Industrial Average had the largest single-day loss up to that point, occurred just 11 months before we detect a shift toward lower fertility. It is possible that the trend toward lower fertility in August 2009 and the stock market crash in September 2008 are linked, although, as stated previously, we are speculating only to illustrate how causal inference could work in an abductive research agenda. A potentially interesting future line of research would be to link fertility anomalies to the kinds of economic shocks that may lead to out-migration of those in their childbearing years.  
 
 ```{r FertilityAnomalies, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Louisiana (a) and Connecticut (b) state fertility, 2003-2018.} The top part of each panel contains the original time series (light gray), the corrected, counter-factual time series in the absence of anomalies (blue), and the red dots correspond to the onset of detected anomalies. The bottom part of each panel contains the magnitude and type of the outlier in red. In (a), we detect two outliers, back-to-back, likely resulting from Hurricane Katrina in August and October 2005, representing a decrease of more than 4,400 births due to the hurricane (t-statistics= -6.002 and -4.997). In (b), we detect one outlier, a level shift outlier (LS) in August 2009. We believe this reduction is attributable to the stock market crash 11 months earlier (t-statistic = -3.71). \\label{fig:fertla}")}
 
@@ -305,9 +366,9 @@ oh_tot <- prettyNum(abs(round(outlier.mort.oh$outliers[7,4]*(228-194), digits = 
 
 In **\autoref{fig:ferthawaii}a** we identify a single additive anomaly in Hawaiian fertility in May 2014. This is a strong anomaly with a *t*-statistic of `r hi_tstat`, `r hi_per` above the counter-factual time series. This single, anomalous month is also the second highest monthly births in the time series. We have no plausible explanation for this anomaly. We do not believe this is simply a data error as the other extreme values, September 2008 and February 2005 with the highest and lowest recorded fertility respectively, were not identified as anomalous events. Even if we were to assume this anomaly resulted from data entry error, it remains an *unaltered* data error in the Hawaiian monthly fertility data.
 
-This is contrast to **\autoref{fig:ferthawaii}b**, where we identify a strange mortality reduction in Ohio (*t*-stat: `r oh_tstat`). This LS is more than `r oh_deaths` deaths per month less than the counterfactual time series, suggesting had nearly `r oh_tot` fewer deaths since February 2015 than expected. This is the single-largest LS among all states. We could not identify the potential policies Ohio might have put into place to provide such a strong mortality protection.
+This is contrast to **\autoref{fig:ferthawaii}b**, where we identify a strange mortality reduction in Ohio (*t*-stat: `r oh_tstat`). This LS is more than `r oh_deaths` deaths per month less than the counter-factual time series, suggesting had nearly `r oh_tot` fewer deaths since February 2015 than expected. This is the single-largest LS among all states. We could not identify the potential policies Ohio might have put into place to provide such a strong mortality protection.
 
-```{r TrueAnomalies, echo= FALSE, message = FALSE, warning = FALSE, fig.cap= paste("\\textbf{Anomaly detection in Hawaii state fertility (a) and Ohio state mortality (b).} Here we detect one outlier, an additive outlier (AO) in May 2014 in Hawaii (a), representing a large, unexplainable 14% increase in expected births in that month. We also detect a strong level shift (LS) reduction (b), representing a large, unexplainable reduction of nearly 40,000 deaths in Ohio.  \\label{fig:ferthawaii}")}
+```{r TrueAnomalies, echo= FALSE, message = FALSE, warning = FALSE, fig.height = 5, fig.cap= paste("\\textbf{Anomaly detection in Hawaii state fertility (a) and Ohio state mortality (b).} Here we detect one outlier, an additive outlier (AO) in May 2014 in Hawaii (a), representing a large, unexplainable 14% increase in expected births in that month. We also detect a strong level shift (LS) reduction (b), representing a large, unexplainable reduction of nearly 40,000 deaths in Ohio.  \\label{fig:ferthawaii}")}
 
 a <-  function() {
 plot(outlier.fert.hi, cex.axis=0.8)
@@ -410,7 +471,7 @@ Data scientists frequently claim that the big data revolution is a turning point
 
 One technique that population scientists underutilize is causal inference.  Causal inference, in the simplest terms, is the discovery of effects in search of a cause using big data and advanced computing algorithms [@imai2008misunderstandings].  This inductive approach is uncommon in quantitative social science where hypothesis testing is expected, and approaches are largely deductive.  However, common statistical hypothesis testing is impractical with big data, as significant p values are guaranteed, and such approaches do not allow us to uncover all the information that big data has to offer [@monroe2015no].  Here, we call for an abductive approach, where causal inference algorithms are applied to high quality data to uncover irregularities that are unlikely to be attributable to expected variations in trends (or noise) as a first step to then developing testable hypotheses about causes. Abductive approaches allow researchers to move from the inductive to the deductive and sometimes work back and forth in aid of scientific discovery.  
 
-In this paper, we show how the tsoutlier package in R can be implemented to conduct statistical time series outlier detection, an inductive approach that aids in the creation of deductive reasoning.  This algorithm is one of many causal inference approaches that are freely and commercially available (see @rcausalimpact).  In our initial work, we experimented with other approaches, such as Google’s causalimpact algorithm, which uncovered the same patterns we briefly discuss in this paper.  By making more use of causal inference techniques and abductive modeling approaches, we argue that social scientists will be able to better understand how events or policy implementation can impact important outcomes.  For example, we could uncover—on a wide scale—how gun control policies may reduce or increase injuries from shootings or how marijuana legalization might impact opioid deaths.  We could also uncover how increases in extreme weather events impact a range of behaviors such as home sales, bottled water purchases, and even fertility.  
+In this paper, we show how the tsoutlier package in R can be implemented to conduct statistical time series outlier detection, an inductive approach that aids in the creation of deductive reasoning.  This algorithm is one of many causal inference approaches that are freely and commercially available (see @rcausalimpact).  In our initial work, we experimented with other approaches, such as Google’s CausalImpact algorithm, which uncovered the same patterns we briefly discuss in this paper.  By making more use of causal inference techniques and abductive modeling approaches, we argue that social scientists will be able to better understand how events or policy implementation can impact important outcomes.  For example, we could uncover—on a wide scale—how gun control policies may reduce or increase injuries from shootings or how marijuana legalization might impact opioid deaths.  We could also uncover how increases in extreme weather events impact a range of behaviors such as home sales, bottled water purchases, and even fertility.  
 
 In our demonstration, we show how the application of causal inference to state-level time series fertility and mortality data uncovers three types of demographic anomalies:  those that occur and disappear quickly, those that occur and decay over time, and those that occur and remain.  Uncovering these anomalies in and of themselves is important.  For example, the algorithm we deploy clearly shows the fertility effects of Hurricanes Katrina and Rita as well as the mortality effects of the World Trade Center collapse on September 11, 2001.  The ability to identify and differentiate types of anomalies is even more important, as we can potentially see how some policies might impact outcomes permanently and some might have an effect that is short-lived.  Differentiating these types gives us greater insight into short- and long-term solutions to social problems.  We urge social scientists to begin to use causal inference algorithms and other big data techniques, and we hope that this demonstration will illustrate their usefulness to the social science enterprise.  
 
