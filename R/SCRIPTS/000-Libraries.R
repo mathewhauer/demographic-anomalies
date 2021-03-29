@@ -67,7 +67,11 @@ pkgs <- c(
   "numform",
   "statebins",
   "flipTime",
-  "gridGraphics"
+  "gridGraphics",
+  "lemon",
+  "ggrepel",
+  "latex2exp",
+  "ggtext"
 )
 
 # Install missing packages

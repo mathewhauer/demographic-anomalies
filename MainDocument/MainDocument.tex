@@ -25,6 +25,7 @@
 
 
 
+% Pandoc citation processing
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -65,11 +66,11 @@
 
 \if0\blind
 {
-  \title{\bf Causal Inference in Population Trends: Searching for Demographic
-Anomalies in Big Data}
+  \title{\bf Causal Inference in Population Trends: Searching for
+Demographic Anomalies in Big Data}
 
   \author{
-        Mathew E. Hauer \thanks{Thanks y'all!} \\
+        Mathew E. Hauer \\
     Department of Sociology, Florida State University\\
      and \\     Stephanie A. Bohon \\
     Department of Sociology, University of Tennessee - Knoxville\\
@@ -83,8 +84,8 @@ Anomalies in Big Data}
   \bigskip
   \bigskip
   \begin{center}
-    {\LARGE\bf Causal Inference in Population Trends: Searching for Demographic
-Anomalies in Big Data}
+    {\LARGE\bf Causal Inference in Population Trends: Searching for
+Demographic Anomalies in Big Data}
   \end{center}
   \medskip
 } \fi
@@ -101,19 +102,19 @@ booms/busts and mortality spikes/dips, distinguishable from regular
 trend variations. We identify more than 22 and 156 fertility and
 mortality anomalies, totaling more than 200k and 600k anomalous births
 and deaths, respectively. Notable detectable mortality anomalies include
-the September 11 2001 terrorist attack in New York, the emergence and
-acceleration of the opioid epidemic in New Hampshire, and the excess
-mortality due to Hurricane Maria in Puerto Rico. Notable fertility
+the September 11 2001 terrorist attack in New York and the emergence and
+acceleration of the opioid epidemic in New Hampshire. Notable fertility
 anomalies include the ``missing births'' in Louisiana after Hurricane
 Katrina and the reduction in fertility behavior after the September 2008
-stock market crash in Connecticut, amongst others. Our combined causal
+stock market crash in Connecticut, amongst others. The combined causal
 inference and abductive reasoning approach can be readily adapted to
 find other, undiscovered social phenomena or to evaluate the efficacy of
 important public policies.
 \end{abstract}
 
 \noindent%
-{\it Keywords:} mortality, fertility, causal inference, abductive reasoning, big data
+{\it Keywords:} mortality, fertility, causal inference, abductive
+reasoning, big data
 \vfill
 
 \newpage
@@ -124,9 +125,9 @@ important public policies.
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-The search for causality is one of the primary motivations behind social
-science \citep{smith2011commentary, pearl2009causal}. Causal Inference,
-the identification of causal mechanisms, attempts to uncover the
+The search for causality is one of the primary motivations of social
+scientists \citep{smith2011commentary, pearl2009causal}. Causal
+inference, the identification of causal effects, attempts to uncover the
 underlying mechanisms that result in changes in a phenomenon and has a
 long history as an approach to inquiry in the social sciences
 \citep{grimmer2015ppsp}. Often, the identification of a casual mechanism
@@ -136,31 +137,36 @@ applied to a natural experiment \citep{salganik2019bit}.
 Unfortunately, both RCTs and natural experiments have drawbacks. RCTs
 are often prohibitively expensive for many scientists, precluding their
 widespread adoption in the social sciences \citep{west2008ajph}. RCTs
-are also sometimes impossible to deploy in the ``real world''. For
+are also sometimes impossible to deploy in the ``real world.'' For
 instance, an RCT to study country-level austerity measures would be
-difficult, if not impossible, to implement. Natural experiments are a
-cheaper alternative, but provide less certainty about causation, fewer
-opportunities to replicate work, and require expert knowledge of the
-natural experiment to be properly employed \citep{pearl2018book}.
+difficult, if not impossible, to implement. RCTs to study fertility
+would be immoral. Natural experiments are a cheaper alternative but
+provide less certainty about causation, fewer opportunities to replicate
+work, and require expert knowledge of the natural experiment to be
+properly employed \citep{pearl2018book}.
 
-Additionally, both RCTs and natural experiments follow traditional
-hypothesis testing, the deductive scientific paradigm where a question
-is first posed and scientists generate or find data to answer the
-question. Such approaches, while extensively utilized and time-tested,
-are likely to miss important phenomena that might go unnoticed or suffer
-from extensive p-hacking
-\citep{head2015extent, nuzzo2014scientific, ruggles2014big}. Abductive
-reasoning, sometimes described as ``inferring cause from effect''
-\citep{Crowder2017}, moves the scientific process from the inductive to
-the deductive, and sometimes back and forth, to reach conclusions
-\citep{bryant2014realm} The physical sciences use abductive reasoning
-more fully compared to the social sciences. The discovery of Neptune in
-1846 based on unexplained perturbations of the orbit of Uranus
-\citep{popper2005logic}, the discovery of galactic migration of planets
-\citep{gomes2005n}, and the current generation of gravitational wave
-detectors such as the Laser Interferometer Gravitational-Wave
-Observatory (LIGO) \citep{harry2010advanced} demonstrate the power of
-the abductive approach in the physical sciences.
+Additionally, both RCTs and natural experiments are based on traditional
+hypothesis-based testing, the deductive scientific paradigm where a
+question is first posed and scientists generate or find data to answer
+the question. Such approaches, while extensively utilized and
+time-tested, increase the likelihood that a researcher will miss
+important phenomena that might go unnoticed because it falls outside the
+hypothesis, or the study could suffer from extensive p-hacking
+\citep{head2015extent, nuzzo2014scientific, ruggles2014big}. At the same
+time, purely inductive data mining can result in false assertions or
+spurious findings, especially in the hands of those who are not field
+experts \citep{yanai_hypothesis_2020}. Abductive reasoning, sometimes
+described as ``inferring cause from effect'' \citep{Crowder2017}, moves
+the scientific process from the inductive to the deductive, and
+sometimes back and forth, to reach conclusions \citep{bryant2014realm}.
+Physical scientists use abductive reasoning more commonly than social
+scientists. The discovery of Neptune in 1846 based on unexplained
+perturbations of the orbit of Uranus \citep{popper2005logic}, the
+discovery of galactic migration of planets \citep{gomes2005n}, and the
+current generation of gravitational wave detectors such as the Laser
+Interferometer Gravitational-Wave Observatory (LIGO)
+\citep{harry2010advanced} demonstrate the power of the abductive
+approach in the physical sciences.
 
 In a data-rich environment, abductive reasoning can be more easily
 applied to first find effects and then infer their cause ex-post. The
@@ -169,7 +175,7 @@ computing, and the development of powerful statistical algorithms
 provide an environment ripe for wedding causal inference with abductive
 reasoning \citep{van2016data, zikopoulos2011}, with the potential for
 researchers to find hidden or understudied social phenomena
-\citep{bohon2018demography}. While the availability of Big Data and high
+\citep{bohon2018demography}. While the availability of big data and high
 performance computing allows novel exploration of data through causal
 inference
 \citep{bohon2018demography, rcausalimpact, shiffrin2016drawing},
@@ -185,18 +191,20 @@ phenomena occurs without identifying the underlying cause.
 
 In this paper, we combine a modern statistical outlier detection
 algorithm \citep{chen1993joint}, abductive reasoning, and large
-demographic data sets on more than 20 years of mortality/fertility to
-identify anomalous demographic behavior. In essence, we identify
-\emph{effects without knowledge of the cause}. We ask one fundamental
-question regarding demographic anomalies: What are the hidden baby
-booms/busts and mortality spikes/dips in the United States over the last
-twenty years? We do not necessarily know the causes of these anomalies
-but identifying them allows scientists with more detailed knowledge of
-local population dynamics, state-level policy making, or macro-economics
-to explain these phenomena post-hoc. From explanations of phenomena that
-may have previously gone unnoticed, social scientists may be able to
-better forecast populations and provide policy solutions for impending
-problems such as climate change.
+demographic data sets on more than 20 years of mortality and fertility
+trends to identify anomalous demographic behavior. In essence, we
+identify \emph{effects without knowledge of the cause}. We ask one
+fundamental question regarding demographic anomalies: What are the
+hidden baby booms/busts and mortality spikes/dips in the United States
+over the last twenty years? We do not necessarily know the causes of
+these anomalies and suggest causes for select anomalies. Even without
+knowledge of the causes, simply identification of anomalies allows
+scientists with more detailed knowledge of local population dynamics,
+state-level policy making, or macro-economics to explain these phenomena
+post-hoc. From explanations of phenomena that may have previously gone
+unnoticed, social scientists may be able to better forecast populations
+and provide policy solutions for impending problems such as climate
+change.
 
 \hypertarget{abductive-reasoning-and-causal-inference}{%
 \section{Abductive Reasoning and Causal
@@ -206,26 +214,26 @@ Scientific inquiry falls under one of three modes of logical reasoning:
 deduction, induction, and abduction. Deductive reasoning starts with a
 theory and makes a prediction of what the observations should be if that
 theory is correct. The classic example of deductive reasoning
-essentially goes (a) ``all men are mortal'', (b) ``Socrates is a man'',
-(c) ``Therefore, Socrates is mortal.'' Deductive reasoning has a long
+essentially goes (a) ``all men are mortal,'' (b) ``Socrates is a man,''
+(c) ``therefore, Socrates is mortal.'' Deductive reasoning has a long
 history in the sciences and most hypothesis testing in the social
 sciences follows this logical reasoning. For example, John Snow used
-deductive reasoning in to stop the 1854 London cholera outbreak. He
+deductive reasoning to stop the 1854 London cholera outbreak. He
 hypothesized that cholera was waterborne and deduced that a bad water
 pump was responsible for the outbreak.
 
-Inductive reasoning is the opposite of deductive reasoning. Rather than
-starting with a theory and making a prediction, induction starts with an
-observation and makes a theory based on the likeliest reason. For
-example, the Hispanic Mortality Paradox first appeared in the scientific
-literature in the mid-1980s \citep{markides1986health} as an observation
-that hispanics in the United States had, paradoxically, better health
+Inductive reasoning is directionally opposite of deductive reasoning.
+Rather than starting with a theory and making a prediction, induction
+starts with an observation and makes a theory based on the likeliest
+reason. For example, the Hispanic Mortality Paradox first appeared in
+the scientific literature in the mid-1980s \citep{markides1986health} as
+an observation that Hispanics in the United States had better health
 outcomes than expected given their socioeconomic status. Based on this
 observation, numerous theories arose to explain this paradox.
 
 Both deductive and inductive reasoning are well established in science
 but are not without their shortcomings. In both approaches, it is
-impossible, or at least imporbable, for the premise to be true and the
+impossible, or at least improbable, for the premise to be true and the
 conclusion false. Furthermore, if a hypothesis is rejected under a
 deductive or inductive approach, there is no alternative explanation --
 there is either the presence or absence of support.
@@ -246,23 +254,24 @@ testable hypothesis, and induction is the empirical support
 
 Abductive reasoning and exploratory data analysis are best employed in a
 data rich environment -- the very data environment social scientists and
-demographers find themselves in the present moment. Additionally, in a
-data rich environment, a hypothesis is a hidden liability
-\citep{yanai_hypothesis_2020}because it focuses our attention on only
-that which we seek\footnote{Yanai and Lercher
+demographers find themselves in the present moment. In a data rich
+environment, a hypothesis is a hidden liability
+\citep{yanai_hypothesis_2020} because it focuses our attention on only
+that which we seek. To demonstrate this, \footnote{Yanai and Lercher
   \citeyearpar{yanai_hypothesis_2020} ask if focusing on a specific
-  hypothesis prevents new discovery? They created a simple dataset that
-  if plotted would reveal an image of a gorilla waving. Students
-  instructed to find support for specific hypotheses were less likely to
-  discover the gorilla compared to those who were simply asked ``What do
-  you conclude from the dataset?''}. Focusing on specific hypotheses
-often prevents us from finding other interesting phenomena. Afterall, it
-was the publication of the hispanic paradox itself that has generated
-more than thirty years of devoted scholarship. When paired with causal
-inference techniques, abductive reasoning provides an empirical platform
-for the discovery of potentially interesting social phenomena; it
-provides an important tool for sifting large amounts of data to find
-interesting results in the absence of hypothesis testing.
+  hypothesis prevents new discovery. By way of illustration, they
+  created a simple dataset that if plotted would reveal an image of a
+  gorilla waving. Students instructed to find support for specific
+  hypotheses were less likely to discover the gorilla compared to those
+  who were simply asked ``What do you conclude from the dataset?''}.
+Focusing on specific hypotheses often prevents us from finding other
+interesting phenomena. After all, it was the publication of the Hispanic
+paradox itself that has generated more than thirty years of devoted
+scholarship. At the same time, when paired with causal inference
+techniques, abductive reasoning provides an empirical platform for the
+discovery of potentially interesting social phenomena; it provides an
+important tool for sifting large amounts of data to find interesting
+results without the blinders of hypothesis testing.
 
 \hypertarget{materials-and-methods}{%
 \section{Materials and Methods}\label{materials-and-methods}}
@@ -350,64 +359,45 @@ longer significant are removed.
 These two stages are then iterated until no additional anomalies are
 detected.
 
-\hypertarget{robustness-check}{%
-\subsection{Robustness Check}\label{robustness-check}}
-
-To determine the false-positive (Type I) and false-negative (Type II)
-error rates under a critical value of 3.5, we ran two simulations. For
-the false-positive error we simulated 1000 time series with 180 time
-steps without introducing any anomalies and ran the \texttt{tsoutliers}
-algorithm on them. Any anomalies we detect in these time series are
-spurious anomalies. For the false-negative error, we simulated 1000 time
-series with 180 time steps but introduced a single anomaly of the same
-magnitude at the same time point in each time series. If the
-\texttt{tsoutliers} algorithm fails to detect the anomaly, it would be
-considered a false-negative error.
-
-In our anomaly-less time series, we detect 208 anomalies on the 180,000
-candidate time steps for a false-positive error rate of 0.116\%. In our
-time series containing a single anomaly, we detect 817 anomalies out of
-the 1000 candidate time series, for a false-negative error rate of
-18.3\%. This provides a statistical power of 0.817. These results give
-us confidence that the anomalies we detect in this paper are true
-anomalies.
-
 \begin{figure}
 \centering
-\includegraphics{../MainDocument/MainDocument_files/figure-latex/Figure1.png}
-\caption{\textbf{``Toy'' example of anomaly detection using the exchange
-rate between the Euro and the Swiss Franc.} The Swiss Franc was pegged
-to the Euro at 1.2 until January 15 2015 when the peg was removed and
-the currency was allowed to trade more freely. This is a very strong
-anomly in the time series (\emph{t}-stat = -144.07) detectable using
-statistical methods and visually. The countefactural estimate with the
-outlier removed would simply have kept the currency exchange at 1.2
-(\(\hat{y}\)). \label{explanationfigure}}
+\includegraphics{MainDocument_files/figure-latex/ToyExample-1.pdf}
+\caption{\textbf{An example of anomaly detection using Hurricanes Katrina and Rita in Orleans Parish Louisiana in 2005.}
+Hurricane Katrina struck Louisiana in 2005 and we use it as a toy
+example to illustrate our approach. This figure shows the annual time
+series of total population in Orleans Parish between 1980 and 2019.
+Between 1990 and 2005, Orleans Parish total population changed from 495k
+to 494k, suggesting a possible `plateau' in the population (illustrated
+with the dotted `counterfactual'). Hurricane Katrina and the widespread
+population loss of more than 200k people represent a very strong anomaly
+(t=-96.39) \label{explanationfigure}}
 \end{figure}
 
 \hypertarget{toy-example}{%
 \subsection{Toy example}\label{toy-example}}
 
 \textbf{\autoref{explanationfigure}} shows a toy example for anomaly
-detection in a time series using the classic example of the exchange
-rate between the Euro and the Swiss Franc (CHF). On January 15 2015, the
-Swiss National Bank removed the currency peg of 1.20 francs per Euro,
-exposing the Franc to the volatility of the currency market. The Franc
-immediately began trading a reduced rate compared to the Euro. What
-would have been the Euro/CHF exchange rate had the Swiss National Bank
-\emph{not} removed the peg? A simple counter-factual estimate would be
-to keep the exchange rate at 1.20 (\(\hat{y}\), sometimes called a
-``synthetic control'' \citep{abadie2010synthetic}).
+detection in a time series using the example of Hurricane Katrina in
+Orleans Parish. On August 23 2005, Hurricane Katrina, a category 5
+hurricane, struck southern Louisiana causing widespread damage and
+destruction in Orleans Parish in particular. The displacement from the
+Hurricane and the federal response were well documented
+\citep{horiDisplacementDynamicsSouthern2009, fussellRecoveryMigrationCity2014}
+and Census estimates suggest Orleans Parish lost more than 200,000
+residents between 2005 and 2006. What would have been Orleans'
+population estimate had Hurricane Katrina \emph{not} occurred? A simple
+counter-factual estimate might keep population size just under 500,000
+people (\(\hat{y}\)).
 
-In the Swiss Franc example, we have knowledge of the Swiss Bank's
-activities after the fact or ex-post-facto to to create the
-counter-factual time series \(\hat{y}\) of 1.20. But is this anomaly
-detectable without knowledge of the Swiss Bank's activities? In other
-words, can we detect the reduction of the exchange rate on January 15
-using only the time series? Absolutely. the tsoutliers package
-identifies January 15 2015 as an extremely strong level-shift outlier
-(\emph{t}-stat = -144.07). The real world is hardly this simplified
-where a direct intervention is known and is testable.
+In the Hurricane Katrina example, we have knowledge of the impact of
+Hurricane Katrina after the fact or ex-post-facto in order to create the
+counter-factual time series \(\hat{y}\). But is this anomaly detectable
+without knowledge of the Hurricane Katrina? In other words, can we
+detect the reduction of Orleans Parish's population between 2005 and
+2006 using only the time series? Absolutely. the tsoutliers package
+identifies 2006 as an extremely strong level-shift outlier
+(\emph{t}-stat = -96.39). The real world is hardly this simplified where
+a direct intervention is known, is large, and is testable.
 
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
@@ -424,14 +414,55 @@ collections \citep{mahapatra2007civil} and have been considered
 equivalent's (n=51) mortality (n=228) and fertility (n=180) monthly time
 series for a total of 20,808 state-months of data.
 
+\hypertarget{robustness-check}{%
+\subsection{Robustness Check}\label{robustness-check}}
+
+Chen and Liu \citeyearpar{chen1993joint} report results of a simulation
+exercise of varying critical value levels. They simulated various
+anomaly-free time series and injected specific anomalies of varying
+\(\sigma\) levels. For a critical value of 3.5 -- the level Chen and Liu
+recommend to minimize both false-positive (Type I) and false-negative
+(Type II) error rates -- they report Type I error rates between 0.0\%
+and 0.1\% and Type II error rates or the statistical power between 40\%
+and 60\% with injected anomalies equal to 4\(\sigma\). We follow their
+lead by simulating time series to test for Type I and Type II errors. We
+base our simulation on the 41 time series that do not contain any
+anomalies (see \textbf{Results} below; 33 without a single fertility
+anomaly and 8 without a single mortality anomaly).
+
+To test for false-positive rates, we simulate 1000 time series for each
+of the 41 state-components (fertility or mortality) using the fitted
+ARIMA model for each state-component. This allows the simulated time
+series to mimic the underlying true time series (see
+\textbf{Supplementary Material} for the underlying code). Any anomalies
+we detect in the 7,764,000 candidate time steps are spurious anomalies.
+We detect 6,588 anomalies for a false-positive error rate of 0.085\%.
+
+To test for false-negative rates, we use the underlying true,
+sans-anomaly time series but introduce a single anomaly (magnitude equal
+to 3.5\(\sigma\)) at the same time point in each series. If the
+\texttt{tsoutliers} algorithm fails to detect the anomaly, it would be
+considered a false-negative error. We detect 27,904 out of 41,000
+candidate time series giving us a false-negative error rate of 31.9\%.
+This provides a statistical power of 68.1\%.
+
+Based on these tests we think it is clear that our probability of
+committing a Type I error (or claiming an anomaly is true when in fact
+is not) is very low. But, based on our false-negative error rate, it is
+possible that the anomalies we do detect are \emph{conservative}. Our
+statistical power is of just 68.1\% suggests a higher than normal
+likelihood that true effects are going undetected. We are unlikely to
+commit an error of commission (ie, including a false anomaly) but are
+more likely to commit an error of omission (ie omitting true anomalies).
+Thus our results should be considered conservative.
+
 \hypertarget{replication-files}{%
 \subsection{Replication Files}\label{replication-files}}
 
 All data and code necessary to reproduce the reported results are
-licensed under the CC-BY-4.0 license and are publicly available in a
-replication repository located at
-\url{https://osf.io/fp52x/?view_only=754d9a72a2ea4f6b8e0c193dc9a590d1}.
-The analyses were performed in \emph{R} \citep{rcite}.
+licensed under the CC-BY-4.0 license and are publicly available as
+\url{https://osf.io/yc3r4/?view_only=3ce3ca267c7047e0942940ebd08846d0}.
+The analyses were performed in \emph{R} \citep{rcore}.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
@@ -442,7 +473,7 @@ in the \textbf{Supplementary Materials}. We begin by highlighting
 significant fertility and mortality anomalies across all three types of
 outliers (Additive Outliers, Level Shift Outliers, and Temporary Change
 outliers) with plausible explanations. We then highlight two strong
-anomalies that bely explanation. Finally, we conclude with a summary of
+anomalies that belie explanation. Finally, we conclude with a summary of
 the anomalies we detect.
 
 \hypertarget{fertility}{%
@@ -483,7 +514,7 @@ their childbearing years.
 \includegraphics{MainDocument_files/figure-latex/FertilityAnomalies-1.pdf}
 \caption{\textbf{Anomaly detection in Louisiana (a) and Connecticut (b) state fertility, 2003-2018.}
 The top part of each panel contains the original time series (light
-gray), the corrected, counter-factual time series in the absence of
+gray), the adjusted, counter-factual time series in the absence of
 anomalies (blue), and the red dots correspond to the onset of detected
 anomalies. The bottom part of each panel contains the magnitude and type
 of the outlier in red. In (a), we detect two outliers, back-to-back,
@@ -517,14 +548,14 @@ single largest mortality protective anomaly among all states. This
 translates to 7\% fewer deaths than expected over the time period. What
 is driving this mortality protection? What policies did NY put into
 place that might have contributed to this considerable mortality
-reduction? What environmental or economic conditions may have changed
-may have changed? These are the kinds of questions that arise from our
-analyses. The purpose of our paper is not to answer these questions, but
-our findings underscore the need for more research that takes an
-abductive approach. By identifying anomalies through an inductive
-process, researchers can then look for underlying causes. Once those
-causes are identified, researchers can then use a deductive process to
-see if such events predict other (or future) anomalies.
+reduction? What environmental or economic conditions may have changed?
+These are the kinds of questions that arise from our analyses. The
+purpose of our paper is not to answer these questions, but our findings
+underscore the need for more research that takes an abductive approach.
+By identifying anomalies through an inductive process, researchers can
+then look for underlying causes. Once those causes are identified,
+researchers can then use a deductive process to see if such events
+predict other (or future) anomalies.
 
 To see the potential for combining abductive reasoning with causal
 inference, contrast the mortality protection in New York with the
@@ -588,10 +619,11 @@ fertility data.
 This is contrast to \textbf{\autoref{fig:ferthawaii}b}, where we
 identify a strange mortality reduction in Ohio (\emph{t}-stat: -4.27).
 This LS is more than 1,157 deaths per month less than the
-counter-factual time series, suggesting had nearly 40,000 fewer deaths
-since February 2015 than expected. This is the single-largest LS among
-all states. We could not identify the potential policies Ohio might have
-put into place to provide such a strong mortality protection.
+counter-factual time series, suggesting Ohio had nearly 40,000 fewer
+deaths since February 2015 than expected. This is the single-largest LS
+among all states. We could not identify the potential policies Ohio
+might have put into place or the events that occurred to provide such a
+strong mortality protection.
 
 \begin{figure}
 \centering
@@ -654,23 +686,24 @@ Consistent with more anomalies across the time series, we find more
 anomalous deaths (627,364) than anomalous births (226,476). Fertility
 anomalies overwhelmingly tend toward lower fertility, with only a few
 fertility anomalies yielding more births. This is consistent with
-research findings that link high severity weather events to
-significantly lower fertility \citep{Evans2008Hurricanebirth}.
-Conversely, mortality anomalies tend to be more evenly split between
-positive and negative anomalies, but tend toward more deaths rather than
-fewer deaths. Again, this is not surprising, as the kinds of events that
-increase death (e.g., plant closings are associated with increased
-opioid death \citep{Venkataramani2019}) are more common than the events
-that decrease death (e.g., cannabis legalization is associated with
-decreased opioid deaths \citep{Livingston2017Cannabis}). These anomalous
-deaths and births account for 1.44\% and 0.889\% over the entire time
-series, respectively.
+research findings that link severe weather events to significantly lower
+fertility \citep{Evans2008Hurricanebirth}. Conversely, mortality
+anomalies tend to be more evenly split between positive and negative
+anomalies, but tend toward more deaths rather than fewer deaths. Again,
+this is not surprising, as the kinds of events that increase death
+(e.g., plant closings are associated with increased opioid death
+\citep{Venkataramani2019}) are more common than the events that decrease
+death (e.g., cannabis legalization is associated with decreased opioid
+deaths \citep{Livingston2017Cannabis}). These anomalous deaths and
+births account for 1.44\% and 0.889\% over the entire time series,
+respectively.
 
 As \textbf{\autoref{fig:summap}} shows, three states exhibited neither
 mortality nor fertility anomalies: Alaska, North Dakota, and South
-Dakota. Another nine states exhibited just a single anomaly (DE, DC, ID,
-IL, KS, NV, NM, UT, and WY). Both New York and Massachusetts exhibited
-the most anomalies with nine.
+Dakota. Another nine states exhibited just a single anomaly (Delaware,
+District of Colombia, Idaho, Illinois, Kansas, Nevada, New Mexico, Utah,
+and Wyoming). Both New York and Massachusetts exhibited the most
+anomalies with nine.
 
 \begin{figure}
 \centering
@@ -688,7 +721,7 @@ turning point in scientific discovery that will allow us to solve some
 of the world's most pressing problems \citep{grimmer2015ppsp}. Social
 scientists are skeptical of such claims, because they better understand
 the complexities of the social world and know from experience that data
-alone is not enough to solve social problems
+alone are not enough to solve social problems
 \citep{bohon2018demography, grimmer2015ppsp}. Nonetheless, the increased
 availability of data and (more importantly, we argue) the development of
 advanced techniques for analyzing these data will enable important
